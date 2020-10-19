@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+STATICFILES_DIRS = [str(BASE_DIR) + '/submitsystem/static/']
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -54,7 +56,7 @@ ROOT_URLCONF = 'umbcsubmitsystem.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [str(BASE_DIR) + '/submitsystem/templates/',], # note: this needed to be added to allow django to find the templates, this might only be a local issue and/or fix
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
