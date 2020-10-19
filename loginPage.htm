@@ -1,0 +1,56 @@
+<!-- Declare doctype and set title, link to css file and bootstrap-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Submit System Login</title>
+    <link rel="stylesheet" type="text/css" href="css/loginStyle.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- header for the page -->
+    <header id="main-header">
+        <div class="container">
+            <h1>MyUMBC Submission System</h1>
+        </div>
+    </header>
+
+    <!-- navbar for the page, hrefs potential to be changed across website -->
+    <nav id="navbar">
+        <div class="container">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <br><br>
+
+    <!-- Login structure, including places for user to input username,
+    password, and button to click to log in -->
+    <h2>Login Page</h2><br>
+    <div class="login">
+    <form id="login" method="get" action="login.php">
+        <label><b>Username
+        </b>
+        </label>
+        <input type="text" name="Uname" id="Uname" placeholder="Username">
+        <br><br>
+        <label><b>Password
+        </b>
+        </label>
+      <input type="Password" name="Pass" id="Pass" placeholder="Password">
+        <br><br>
+        <input type="button" name="log" id="log" value="Log In">
+        <br><br>
+    </form>
+</div>
+</body>
+
+<!-- Footer for the page -->
+<footer id="main-footer">
+        <p>Copyright &copy; 2020 MyUMBC Submission System </p>
+</footer>
+</html>
