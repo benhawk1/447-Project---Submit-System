@@ -3,7 +3,8 @@
 <html lang="en">
 <head>
     <title>Submit System Login</title>
-    <link rel="stylesheet" type="text/css" href="css/loginStyle.css">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'submitsystem/css/loginStyle.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 
@@ -19,10 +20,10 @@
     <nav id="navbar">
         <div class="container">
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a href="/submitsystem/home/">Home</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="/submitsystem/contact/">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -32,18 +33,21 @@
     password, and button to click to log in -->
     <h2>Login Page</h2><br>
     <div class="login">
-    <form id="login" method="get" action="login.php">
+    <form id="login" method="post">
         <label><b>Username
         </b>
         </label>
-        <input type="text" name="Uname" id="Uname" placeholder="Username">
+        {% csrf_token %}
+        <!--<input type="text" name="Uname" id="Uname" placeholder="Username">-->
+        {{ form.username }}
         <br><br>
         <label><b>Password
         </b>
         </label>
-      <input type="Password" name="Pass" id="Pass" placeholder="Password">
+        <!--<input type="Password" name="Pass" id="Pass" placeholder="Password">-->
+        {{ form.password }}
         <br><br>
-        <input type="button" name="log" id="log" value="Log In">
+        <input type="submit" name="log" id="log" value="Log In">
         <br><br>
     </form>
 </div>
