@@ -8,8 +8,6 @@ from datetime import datetime, timezone
 #####################
 ###Constants
 #####################
-MONGODB_URL = ""
-PORT_NUM = 27017
 TIMEZONE = "US/Eastern"
 
 #####################
@@ -22,33 +20,26 @@ def get_timestamp():
     tz = pytz.timezone(TIMEZONE)
     local_time = now.astimezone(tz)
     
-    print("now =", local_time)
     dt_string = local_time.strftime("%m/%d/%Y %H:%M:%S")
-    print("date and time =" , dt_string)
     return dt_string
 
-def submit_file(filename):
-    #attempt database connection
-    try:
-        client = pymongo.MongoClient(MONGODB_URL, PORT_NUM)
-        print("Connection successful")
-    except:
-        print("Connection failed")
-        
-    db = client.admin
-    server_status = db.command("serverStatus")
-    pprint(server_status)
+def submit_file(collection, filename):
+    submission_dict = {}
+    with open(filename, 'rb') as f:
+        submission_dict["filename"] = filename
 
-    collection = db.student_submissions
-    with open(filename, 'r') as f:
         encoded = Binary(f.read())
+        submission_dict["file"] = encoded
+        
         time_string = get_timestamp()
-        #insert document into db; structure depends on structure of database
-        collection.insert({"filename": filename, "file": encoded, "description": "test", "time": time_string})
+        submission_dict["timestamp"] = time_string
 
+        submission_dict["description"] = "test"
+        
     f.close()
+    
+    return collection.insert_one(submission_dict)
 
-get_timestamp()
     
-    
-    
+
+
