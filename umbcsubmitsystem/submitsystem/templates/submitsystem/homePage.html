@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <title>MyUMBC Submission System</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'submitsystem/css/style.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 <body>
     <header id="main-header">
-        <div class="container">
+        <div class="container2">
             <h1>MyUMBC Submission System</h1>
         </div>
     </header>
@@ -29,8 +30,7 @@
 
     <div class="container">
         <section id="main">
-            <h1>Welcome!</h1>
-            <p>This is the current home page for Virtual Victory's MyUMBC Submission System</p>
+            <h1>Welcome to the Submission Page</h1>
 
         </section>
 
@@ -38,36 +38,14 @@
 
     <div class="submission-box">
         <h6>Please Choose a File to Upload</h6>
-         <form action="/action_page.php">
-                <input type="file" id="myFile" name="filename">
+         <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form }}
+                <!--<input type="file" id="myFile" name="filename">-->
                 <input type="submit">
          </form>
     </div>
-<!--
-    <div class="submission-box">
 
-            <h6>Please Choose a file to submit</h6>
-            <form action="/action_page.php">
-                <input type="file" id="myFile" name="filename">
-                <input type="submit">
-            </form>
-    </div>--><!--
-<div>
-<style>
-    body {
-        background: white }
-    section {
-        background: black;
-        color: white;
-        border-radius: 1em;
-        padding: 1em;
-        position: absolute;
-        top: 80%;
-        left: 50%;
-        margin-right: -50%;
-        transform: translate(-50%, -50%) }
-  </style>
-</div>-->
     <footer id="main-footer">
         <p>Copyright &copy; 2020 MyUMBC Submission System </p>
     </footer>
