@@ -1,3 +1,4 @@
+/* body for the page */
 body{
     background-image: url('../images/grayflag.jpg');
     background-color: #fdb515;
@@ -8,31 +9,37 @@ body{
     margin: 0;
 }
 
+/* container used for the main header and navbar */
 .container{
     width:80%;
     margin:auto;
     overflow: hidden;
 }
 
+/* Header, gold text on black background */
 #main-header{
     background-color: black;
     color: #fdb515;
 }
 
+/* Navbar, black text on gold background */
 #navbar{
     background-color: #fdb515;
     color: black;
 }
 
+/* Setup for li */
 #navbar ul{
     padding: 5px;
     list-style: none;
 }
 
+/* show list items so they're in a row, not a column */
 #navbar li{
     display: inline;
 }
 
+/* text of the navbar */
 #navbar a{
     color: black;
     text-decoration: none;
@@ -40,12 +47,14 @@ body{
     padding: 5px;
 }
 
+/* "Login Page" is centered, black text */
 h2{
     text-align: center;
     color: black;
     padding: 20px;
 }
 
+/* design of the login box */
 .login {
     width: 382px;
     overflow: hidden;
@@ -55,11 +64,13 @@ h2{
     border-radius: 20px;
 }
 
+/* labels "Username" and "Password" */
 label{
     color: white;
     font-size: 18px;
 }
 
+/* gray footer fixed to the bottom of the page */
 #main-footer{
     background: #333;
     color: #fff;
