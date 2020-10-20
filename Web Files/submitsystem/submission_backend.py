@@ -37,6 +37,17 @@ def connect_collection(db, coll_name):
 
     return collection
 
+def get_timestamp():
+    # first get UTC time, then convert to EST to avoid issues with daylight savings
+    utc = pytz.timezone("UTC")
+    now = utc.localize(datetime.utcnow())
+
+    tz = pytz.timezone(TIMEZONE)
+    local_time = now.astimezone(tz)
+
+    dt_string = local_time.strftime("%m/%d/%Y %H:%M:%S")
+    return dt_string
+
 def submit_file(filename, coll_name):
     #connect to database, access collection
     client = connect_client()
@@ -53,14 +64,14 @@ def submit_file(filename, coll_name):
 
         encoded = Binary(f.read())
         submission_dict["file"] = encoded
-        
+
         time_string = get_timestamp()
         submission_dict["timestamp"] = time_string
 
         submission_dict["description"] = "test"
-        
+
     f.close()
-    
+
     return collection.insert_one(submission_dict)
 
 def list_collection(coll_name):
@@ -89,13 +100,4 @@ def drop_collection(coll_name):
     collection.drop()
 
 
-def get_timestamp():
-    #first get UTC time, then convert to EST to avoid issues with daylight savings
-    utc = pytz.timezone("UTC")
-    now = utc.localize(datetime.utcnow())
 
-    tz = pytz.timezone(TIMEZONE)
-    local_time = now.astimezone(tz)
-
-    dt_string = local_time.strftime("%m/%d/%Y %H:%M:%S")
-    return dt_string
