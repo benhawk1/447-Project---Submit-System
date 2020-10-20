@@ -1,5 +1,4 @@
-# 447-Project---Submit-System
-UMBC CSEE Submit System README
+# 447-Project---Submit-System README
 Iteration 1
 
 Virtual Victory, Professor Eric Hamilton, CEO
