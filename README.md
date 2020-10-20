@@ -3,11 +3,17 @@ UMBC CSEE Submit System README
 Iteration 1
 
 Virtual Victory, Professor Eric Hamilton, CEO
+
 Ben Hawkins
+
 Jamar Reeves
+
 Nicholas Proulx
+
 Carly Heiner
+
 Zachary Federci
+
 
 
 
@@ -38,6 +44,7 @@ In order to run all code and tests for this iteration of the project, the follow
 
 Login System Backend
 Pulls made at https://github.com/benhawk1/447-Project---Submit-System/pull/23 and https://github.com/benhawk1/447-Project---Submit-System/pull/24
+
 Files for this section include:
 Users.csv - A csv file containing dummy login information for the purposes of testing the existing login system. Passwords in this file are presently stored in both a hashed format (for security testing) and in plaintext, so that testers can easily obtain the passwords. For proper implementation, the plaintext passwords will be removed.
 hashing.py - A python program that hashes a given password, and writes the hashed result into a csv file.
