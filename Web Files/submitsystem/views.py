@@ -1,9 +1,9 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-# from django.contrib.auth import authenticate, login
-# from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, SubmitForm
-from submitsystem.submission_backend import submit_file # an ide may complain about this import but it's what django needs to recognize the file
+from submitsystem.submission_backend import submit_file
 
 # write submitted file to uploads folder
 def handle_uploaded_file(f):
@@ -13,7 +13,7 @@ def handle_uploaded_file(f):
             destination.write(chunk)
     return path
 
-# log in page
+# login page
 def index(request):
     # if this is a POST request, process the form data
     if request.method == 'POST':
@@ -35,6 +35,7 @@ def index(request):
 
     return render(request, 'submitsystem/loginPage.html', {'form': form})
 
+# contact page
 def contact(request):
     return render(request, 'submitsystem/contactPage.html')
 
@@ -60,10 +61,10 @@ def home(request):
 
     return render(request, 'submitsystem/homePage.html', {'form': form})
 
-# former submit page
+# depreciated submit page
 def submit(request):
     return render(request, 'submitsystem/submitPage.html')
 
-# file submission confirmation
+# file submission confirmation (depreciated)
 def result(request):
     return render(request, 'submitsystem/result.html')

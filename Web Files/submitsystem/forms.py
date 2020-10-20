@@ -1,3 +1,5 @@
+# forms for getting data from html pages
+
 from django import forms
 
 # get username and password on login page
