@@ -57,20 +57,12 @@ h2{
     border-radius: 1em;
     padding: 1em;
     position: fixed;
-    top: 450px;
+    top: 475px;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%)
 }
 
-label {
-    display: block;
-    font: 1rem 'Fira Sans', sans-serif;
-}
-
-input, label {
-    margin: .4rem 0;
-}
 
 #main-footer{
     position: fixed;
