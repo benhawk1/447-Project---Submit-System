@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, SubmitForm
 from submitsystem.submission_backend import submit_file
+from django.views.generic.base import TemplateView
 
 # write submitted file to uploads folder
 def handle_uploaded_file(f):
@@ -68,3 +69,16 @@ def submit(request):
 # file submission confirmation (depreciated)
 def result(request):
     return render(request, 'submitsystem/result.html')
+
+# Home Page table:
+class table(TemplateView):
+    template_name = 'submitsystem/newHomePage.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(table, self).get_context_data(**kwargs)
+        context["rosterhead"] = ['Class Number', 'Section', 'First Name', 'Last Name', 'E-Mail']
+        context["rosterbody"] = [{'classname':1, 'section':1, 'firstname':'John', 'lastname':'Lewis', 'email':'john1@umbc.edu'},
+                                 {'classname':2, 'section':2, 'firstname':'Will', 'lastname':'Greene', 'email':'Greene@umbc.edu'}
+                                 ]
+        return context
+    
