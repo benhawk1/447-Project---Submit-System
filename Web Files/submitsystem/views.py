@@ -62,9 +62,27 @@ def home(request):
 
     return render(request, 'submitsystem/homePage.html', {'form': form})
 
-# depreciated submit page
+# submit page
+# @login_required (to be added next iteration)
 def submit(request):
-    return render(request, 'submitsystem/submitPage.html')
+    # if this is a POST request, process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = SubmitForm(request.POST, request.FILES)
+
+        # check whether it's valid:
+        if form.is_valid():
+            # process the file
+            path = handle_uploaded_file(request.FILES['submission'])
+
+            # add to db
+            submit_file(path, 'student_submissions')
+
+    # if a GET (or any other method) create a blank form
+    else:
+        form = SubmitForm()
+
+    return render(request, 'submitsystem/submissionPage.html', {'form': form})
 
 # file submission confirmation (depreciated)
 def result(request):
