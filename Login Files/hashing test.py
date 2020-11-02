@@ -5,10 +5,10 @@ import pandas as pd
 
 # Replace these values with the desired information to be implemented into the CSV file:
 row = 1  # Indices for rows start at 1
-name = "Will Greene"
+name = "Will Red"
 username = "Will1"
 password = "My Password"
-email = "Greene@umbc.edu"
+email = "Red@umbc.edu"
 role = "P"  # Can be S for student, or P for Professor
 
 # Replace path below with the current location of the Users.csv file
