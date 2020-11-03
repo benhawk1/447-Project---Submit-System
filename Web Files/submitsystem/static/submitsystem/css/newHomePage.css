@@ -1,3 +1,4 @@
+/* body for the page */
 body {
     background-image: url('../images/grayflag.jpg');
     background-color: #fdb515;
@@ -7,47 +8,53 @@ body {
     line-height: 1.6em;
     margin: 0;
 }
-                
+
+/* container used for the main header and navbar */
 .container {
     width: 80%;
     margin: auto;
     overflow: hidden;
     color: black;
     }
-                
+/* container used for the */
 .container2 {
     width: 80%;
     margin: auto;
     overflow: hidden;
     color: #fdb515;
 }
-                
+/* Header, gold text on black background */                
 #main-header {
     background-color: black;
     color: #fdb515;
 }
-                
+
+/* Navbar, black text on gold background */
 #navbar {
     background-color: #fdb515;
     color: black;
 }
-                
+
+/* Setup for li */               
 #navbar ul {
     padding: 5px;
     list-style: none;
 }
-                
+
+/* show list items so they're in a row, not a column */
 #navbar li {
     display: inline;
 }
-                
+
+/* text of the navbar */                
 #navbar a {
     color: black;
     text-decoration: none;
     font-size: 16px;
     padding: 5px;
 }
-                
+
+/*adds the UMBC dog image*/
 #showcase {
     display: block;
     margin-left: auto;
@@ -62,7 +69,7 @@ body {
     border-radius: 1em;
     color: black;
 }
-                
+/* css for table headers and data*/                
 table, th, td {
     border: 1px solid black;
 }
@@ -77,14 +84,14 @@ table.center {
     margin-left: auto;
     margin-right: auto;
 }
-                
+/*css for the table*/              
 table {
     font-family: Ariel, Helvetica, sans-serif;
     font-size: 14px;
     line-height: 1.6em;
     margin: auto;
 }
-                
+/*css for the  table to have a scroll bar*/
 table.scrolldown {
     width: 100%;
     /* border-collapse: collapse; */
@@ -146,7 +153,7 @@ td {
     padding: 10px;
     box-sizing: border-box;
 }
-                
+/* gray footer fixed to the bottom of the page */                
 #main-footer {
     /*position: fixed;
     left: auto;
