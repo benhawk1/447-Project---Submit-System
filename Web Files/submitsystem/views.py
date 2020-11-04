@@ -54,7 +54,7 @@ def home(request):
             path = handle_uploaded_file(request.FILES['submission'])
 
             # add to db
-            submit_file(path, 'student_submissions')
+            submit_file("12345", "5", path, 'student_submissions') # use default student ID and section for now
 
     # if a GET (or any other method) create a blank form
     else:
