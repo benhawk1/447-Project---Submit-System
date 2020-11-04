@@ -3,7 +3,9 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, SubmitForm
-from submitsystem.submission_backend import submit_file
+from submitsystem.submission_backend import *
+from submitsystem.db_func import *
+from submitsystem.section_management import *
 from django.views.generic.base import TemplateView
 
 # write submitted file to uploads folder
@@ -56,8 +58,12 @@ def submit(request):
             # process the file
             path = handle_uploaded_file(request.FILES['submission'])
 
+            # add sample section and student
+            add_section(5, 'sections_test')
+            add_student("12345", "Queen Victoria", 5, 'sections_test')
+
             # add to db
-            submit_file("12345", 5, path, 'student_submissions', ) # using sample student id and section for now
+            submit_file("12345", 5, path, 'sections_test', ) # using sample student id and section for now
 
             # add message to display to user
             fileSubmitted = "File submitted"
