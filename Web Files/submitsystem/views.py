@@ -40,31 +40,12 @@ def index(request):
 def contact(request):
     return render(request, 'submitsystem/contactPage.html')
 
-# home and submit page combined
-# @login_required (to be added next iteration)
-def home(request):
-    # if this is a POST request, process the form data
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = SubmitForm(request.POST, request.FILES)
-
-        # check whether it's valid:
-        if form.is_valid():
-            # process the file
-            path = handle_uploaded_file(request.FILES['submission'])
-
-            # add to db
-            submit_file("12345", "5", path, 'student_submissions') # use default student ID and section for now
-
-    # if a GET (or any other method) create a blank form
-    else:
-        form = SubmitForm()
-
-    return render(request, 'submitsystem/homePage.html', {'form': form})
-
 # submit page
 # @login_required (to be added next iteration)
 def submit(request):
+    # displays message if file submitted
+    fileSubmitted = ""
+
     # if this is a POST request, process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -76,13 +57,16 @@ def submit(request):
             path = handle_uploaded_file(request.FILES['submission'])
 
             # add to db
-            submit_file(path, 'student_submissions')
+            submit_file("12345", 5, path, 'student_submissions', ) # using sample student id and section for now
+
+            # add message to display to user
+            fileSubmitted = "File submitted"
 
     # if a GET (or any other method) create a blank form
     else:
         form = SubmitForm()
 
-    return render(request, 'submitsystem/submissionPage.html', {'form': form})
+    return render(request, 'submitsystem/submissionPage.html', {'form': form, 'fileSubmitted' : fileSubmitted})
 
 # file submission confirmation (depreciated)
 def result(request):
