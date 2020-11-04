@@ -1,4 +1,3 @@
-import pymongo
 from db_func import *
 from section_management import *
 #####################

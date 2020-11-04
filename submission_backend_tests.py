@@ -1,5 +1,3 @@
-import pymongo
-
 from submission_backend import * #get functions from submission_backend.py
 from db_func import *
 from section_management import *
@@ -9,7 +7,7 @@ from section_management import *
 ###Constants
 ###################
 
-FILENAME_TEST = "test files\hello_world.py"
+FILENAME_TEST = "Web Files/submitsystem/test files\hello_world.py"
 COLLECTION_NAME = "sections_test"
 STUDENT_ID = "12345"
 STUDENT_NAME = "Queen Victoria"
