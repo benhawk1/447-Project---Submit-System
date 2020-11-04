@@ -68,9 +68,9 @@ def submit(request):
 
     return render(request, 'submitsystem/submissionPage.html', {'form': form, 'fileSubmitted' : fileSubmitted})
 
-# file submission confirmation (depreciated)
-def result(request):
-    return render(request, 'submitsystem/result.html')
+# student manager page
+def studentmanager(request):
+    return render(request, 'submitsystem/studentManagementPage.html')
 
 # Home Page table:
 class homeTable(TemplateView):
