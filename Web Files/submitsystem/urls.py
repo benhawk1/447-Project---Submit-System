@@ -8,5 +8,5 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('submit/', views.submit, name='submit'),
     path('result/', views.result, name='result'),
-    url('home/', views.homeTable.as_view(), name='home') #replaces: path('home/', views.home, name='home'),
+    url('home/', views.homeTable.as_view(), name='home')
 ]

@@ -1,3 +1,4 @@
+<!-- Declare doctype and set title, link to css file and bootstrap-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,20 +7,28 @@
     <link rel="stylesheet" type="text/css" href="{% static 'submitsystem/css/newHomePage.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
+
 <body>
+<!-- header for the page -->
     <header id="main-header">
         <div class="container2">
             <h1>MyUMBC Submission System</h1>
         </div>
     </header>
 
+<!-- navbar for the page, hrefs potential to be changed across website -->
     <nav id="navbar">
         <div class="container">
             <ul>
+<<<<<<< HEAD
                 <li><a href="/submitsystem/home">Home</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Services</a></li>
                 <li><a href="/submitsystem/contact">Contact</a></li>
+=======
+                <li><a href="/submitsystem/home/">Home</a></li>
+                <li><a href="/submitsystem/contact/">Contact</a></li>
+>>>>>>> develop
             </ul>
         </div>
     </nav>
@@ -123,6 +132,7 @@
   </rosterbody>
 </table>
 -->
+<!-- table to be displayed on the page-->
 <table class="table">
     <thead>
         <tr>
@@ -143,6 +153,7 @@
         {% endfor %}
     </tbody>
 </table>
+<!-- Footer for the page -->
    <footer id="main-footer">
         <p>Copyright &copy; 2020 MyUMBC Submission System </p>
     </footer>

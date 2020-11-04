@@ -89,11 +89,11 @@ def result(request):
     return render(request, 'submitsystem/result.html')
 
 # Home Page table:
-class table(TemplateView):
+class homeTable(TemplateView):
     template_name = 'submitsystem/newHomePage.html'
 
     def get_context_data(self, **kwargs):
-        context = super(table, self).get_context_data(**kwargs)
+        context = super(homeTable, self).get_context_data(**kwargs)
         context["rosterhead"] = ['Class Number', 'Section', 'First Name', 'Last Name', 'E-Mail']
         context["rosterbody"] = [{'classname':1, 'section':1, 'firstname':'John', 'lastname':'Lewis', 'email':'john1@umbc.edu'},
                                  {'classname':2, 'section':2, 'firstname':'Will', 'lastname':'Greene', 'email':'Greene@umbc.edu'}

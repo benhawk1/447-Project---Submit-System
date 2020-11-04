@@ -1,4 +1,4 @@
-body{
+body {
     background-image: url('../images/grayflag.jpg');
     background-color: #fdb515;
     color: white;
@@ -8,31 +8,31 @@ body{
     margin: 0;
 }
 
-.container{
-    width:80%;
-    margin:auto;
+.container {
+    width: 80%;
+    margin: auto;
     overflow: hidden;
     color: black;
 }
 
-.container2{
-    width:80%;
-    margin:auto;
+.container2 {
+    width: 80%;
+    margin: auto;
     overflow: hidden;
     color: #fdb515;
 }
 
-
-#main-header{
+#main-header {
     background-color: black;
     color: #fdb515;
 }
 
-#navbar{
+#navbar {
     background-color: #fdb515;
     color: black;
 }
 
+<<<<<<< HEAD
 /* show list items so they're in a row, not a column */
 #navbar li{
     display: inline;
@@ -40,27 +40,46 @@ body{
 
 /* text of the navbar */
 #navbar a{
+=======
+#navbar ul {
+    padding: 5px;
+    list-style: none;
+}
+
+#navbar li {
+    display: inline;
+}
+
+#navbar a {
+>>>>>>> develop
     color: black;
     text-decoration: none;
     font-size: 16px;
     padding: 5px;
 }
 
+<<<<<<< HEAD
 h2{
     text-align: center;
 }
 
 table, th, td{
+=======
+table,
+th,
+td {
+>>>>>>> develop
     border: 1px solid black;
     padding:5px;
     text-align: center;
 }
 
-table.center{
+table.center {
     margin-left: auto;
     margin-right: auto;
 }
 
+<<<<<<< HEAD
 .contact-table{
     border:1px solid black;
     margin-left:auto;
@@ -76,4 +95,10 @@ table.center{
     color: #fff;
     text-align: center;
     padding: 10px;
+=======
+.contact-table {
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+>>>>>>> develop
 }
