@@ -9,7 +9,8 @@ SECTION_NUM = 5
 STUDENT_NAME = "Eric Hamilton"
 NEW_NAME = "Heric Amilton"
 STUDENT_ID = "EH999"
-ASSIGNMENT_FILENAME = "test files\hw1.txt"
+ASSIGNMENT_FILEPATH = "test files\hw1.txt"
+ASSIGNMENT_FILENAME = "hw1.txt"
 DUE_DATE = "December 31, 1999"
 #####################
 
@@ -38,7 +39,7 @@ remove_student(STUDENT_ID, SECTION_NUM, COURSE_NAME)
 
 list_collection(COURSE_NAME) #Eric is removed
 
-add_assignment(SECTION_NUM, ASSIGNMENT_FILENAME, DUE_DATE, COURSE_NAME)
+add_assignment(SECTION_NUM, ASSIGNMENT_FILEPATH, DUE_DATE, COURSE_NAME)
 
 list_collection(COURSE_NAME) #assignment is added
 
