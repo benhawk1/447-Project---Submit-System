@@ -8,5 +8,6 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('submit/', views.submit, name='submit'),
     path('studentmanager/', views.studentmanager, name='studentmanager'),
+    path('assignments/', views.assignments, name="assignments"),
     url('home/', views.homeTable.as_view(), name='home'),
 ]

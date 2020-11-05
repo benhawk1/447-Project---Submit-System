@@ -101,6 +101,9 @@ def studentmanager(request):
 
     return render(request, 'submitsystem/studentManagementPage.html', {'form': form})
 
+def assignments(request):
+    return render(request, 'submitsystem/AssignmentPage.html')
+
 # Home Page table:
 class homeTable(TemplateView):
     template_name = 'submitsystem/newHomePage.html'
