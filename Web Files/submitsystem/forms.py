@@ -24,3 +24,13 @@ class StudentForm(forms.Form):
     id = forms.CharField()
     #email = forms.CharField(widget=forms.EmailInput, required=False)
     #roster = forms.FileField(label='', required=False)
+
+class AssignmentForm(forms.Form):
+    createRemove = forms.ChoiceField(choices=[("Create", "Create"), ("Remove", "Remove")], required=False)
+    classNum = forms.IntegerField(required=False)
+    sectionChoices = []
+    for i in range(1, 5):
+        sectionChoices.append((i, f'Section {i}'))
+    section = forms.MultipleChoiceField(widget=forms.RadioSelect(attrs={"class": "radio-inline"}), choices=sectionChoices, required = False)
+    assignmentName = forms.CharField(required=False)
+    datetimeDue = forms.DateTimeField(required=False)
