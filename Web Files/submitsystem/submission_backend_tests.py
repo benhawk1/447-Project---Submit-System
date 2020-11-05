@@ -1,5 +1,3 @@
-import pymongo
-
 from submission_backend import * #get functions from submission_backend.py
 from db_func import *
 from section_management import *

@@ -32,13 +32,14 @@ body {
     color: black;
 }
 
+/* show list items so they're in a row, not a column */
+#navbar li{
+    display: inline;
+}
+
 #navbar ul {
     padding: 5px;
     list-style: none;
-}
-
-#navbar li {
-    display: inline;
 }
 
 #navbar a {
@@ -59,8 +60,10 @@ table.center {
     margin-right: auto;
 }
 
+
 .contact-table {
     border: 1px solid black;
     margin-left: auto;
     margin-right: auto;
+
 }

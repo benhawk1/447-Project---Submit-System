@@ -3,7 +3,9 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, SubmitForm
-from submitsystem.submission_backend import submit_file
+from submitsystem.submission_backend import *
+from submitsystem.db_func import *
+from submitsystem.section_management import *
 from django.views.generic.base import TemplateView
 
 # write submitted file to uploads folder
@@ -40,9 +42,12 @@ def index(request):
 def contact(request):
     return render(request, 'submitsystem/contactPage.html')
 
-# home and submit page combined
+# submit page
 # @login_required (to be added next iteration)
-def home(request):
+def submit(request):
+    # displays message if file submitted
+    fileSubmitted = ""
+
     # if this is a POST request, process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -53,29 +58,32 @@ def home(request):
             # process the file
             path = handle_uploaded_file(request.FILES['submission'])
 
+            # add sample section and student
+            add_section(5, 'sections_test')
+            add_student("12345", "Queen Victoria", 5, 'sections_test')
+
             # add to db
-            submit_file(path, 'student_submissions')
+            submit_file("12345", 5, path, 'sections_test', ) # using sample student id and section for now
+
+            # add message to display to user
+            fileSubmitted = "File submitted"
 
     # if a GET (or any other method) create a blank form
     else:
         form = SubmitForm()
 
-    return render(request, 'submitsystem/homePage.html', {'form': form})
-
-# depreciated submit page
-def submit(request):
-    return render(request, 'submitsystem/submitPage.html')
+    return render(request, 'submitsystem/submissionPage.html', {'form': form, 'fileSubmitted' : fileSubmitted})
 
 # file submission confirmation (depreciated)
 def result(request):
     return render(request, 'submitsystem/result.html')
 
 # Home Page table:
-class table(TemplateView):
+class homeTable(TemplateView):
     template_name = 'submitsystem/newHomePage.html'
 
     def get_context_data(self, **kwargs):
-        context = super(table, self).get_context_data(**kwargs)
+        context = super(homeTable, self).get_context_data(**kwargs)
         context["rosterhead"] = ['Class Number', 'Section', 'First Name', 'Last Name', 'E-Mail']
         context["rosterbody"] = [{'classname':1, 'section':1, 'firstname':'John', 'lastname':'Lewis', 'email':'john1@umbc.edu'},
                                  {'classname':2, 'section':2, 'firstname':'Will', 'lastname':'Greene', 'email':'Greene@umbc.edu'}
