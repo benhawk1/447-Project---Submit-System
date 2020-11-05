@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from .forms import LoginForm, SubmitForm, StudentForm
+from .forms import LoginForm, SubmitForm, StudentForm, AssignmentForm
 from submitsystem.submission_backend import *
 from submitsystem.db_func import *
 from submitsystem.section_management import *
@@ -58,12 +58,13 @@ def submit(request):
             # process the file
             path = handle_uploaded_file(request.FILES['submission'])
 
-            # add sample section and student
-            add_section(5, 'sections_test')
-            add_student("12345", "Queen Victoria", 5, 'sections_test')
+            # add sample course, section, and student (expected to say collection create failed if course already exits)
+            create_collection('CMSC 447')
+            add_section(5, 'CMSC 447')
+            add_student("EH999", "Eric Hamilton", 5, 'CMSC 447')
 
             # add to db
-            submit_file("12345", 5, path, 'sections_test', ) # using sample student id and section for now
+            submit_file("EH999", 5, path, 'CMSC 447') # using sample student id and section for now
 
             # add message to display to user
             fileSubmitted = "File submitted"
@@ -92,8 +93,16 @@ def studentmanager(request):
             #email = form.cleaned_data['email'] email replaced with id to match backend
             id = form.cleaned_data['id']
             print(addRemove, classNum, section, firstName, lastName, id)
-            add_section(section, 'sections_test')
-            add_student(id, f'{firstName} {lastName}', section, 'sections_test')
+
+            # create class and section (expected to say collection create failed if class already exits)
+            create_collection(classNum)
+            add_section(section, classNum)
+
+            # add the student or remove them if add is not selected
+            if addRemove == "Add":
+                add_student(id, f'{firstName} {lastName}', section, classNum)
+            else:
+                remove_student(id, section, classNum)
 
     # if a GET (or any other method) create a blank form
     else:
@@ -102,7 +111,42 @@ def studentmanager(request):
     return render(request, 'submitsystem/studentManagementPage.html', {'form': form})
 
 def assignments(request):
-    return render(request, 'submitsystem/AssignmentPage.html')
+    # if this is a POST request, process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = AssignmentForm(request.POST, request.FILES)
+
+        # check whether it's valid:
+        if form.is_valid():
+            # process the file
+            path = handle_uploaded_file(request.FILES['uploadFile'])
+
+            # process the input
+            createRemove = form.cleaned_data['createRemove']
+            classNum = form.cleaned_data['classNum']
+            section = form.cleaned_data['section']
+            assignmentName = form.cleaned_data['assignmentName']
+            datetimeDue = form.cleaned_data['datetimeDue']
+
+            print(createRemove, classNum, section, assignmentName, datetimeDue)
+
+            # add course and section(s) # (expected to say collection create failed if course already exits)
+            create_collection(classNum)
+            add_section(section, classNum)
+            # create assignment or remove assignment if create is not selected
+            if createRemove == "Create":
+                add_assignment(section, path, datetimeDue, classNum)
+            else:
+                remove_assignment(section, path, classNum)
+
+        else:
+            print("invalid")
+
+    # if a GET (or any other method) create a blank form
+    else:
+        form = AssignmentForm()
+
+    return render(request, 'submitsystem/AssignmentPage.html', {'form' : form})
 
 # Home Page table:
 class homeTable(TemplateView):
