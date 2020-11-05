@@ -4,8 +4,8 @@
 <html lang="en">
 <head>
     <title>Assignment Page</title>
-    {% load static%}
-    <link rel="stylesheet" type="text/css" href="css/assignmentStyle.css">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'submitsystem/css/assignmentStyle.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 <body>
@@ -24,6 +24,7 @@
                 <li><a href="/submitsystem/contact/">Contact</a></li>
                 <li><a href="/submitsystem/submit/">Submit</a></li>
                 <li><a href="/submitsystem/studentmanager/">Student Manager</a></li>
+                <li><a href="/submitsystem/assignments/">Assignments</a></li>
             </ul>
         </div>
     </nav>
@@ -43,7 +44,7 @@
 
    <div class="submission-box">
         <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
+            {% csrf_token %}
 
              <label> Create/Remove Assignment:</label>
                 <!--<select name="CreateRemove" id="CreateRemove">
@@ -76,17 +77,18 @@
                 {{ form.assignmentName }}
             <br><br>
 
-            <label>"dueDT">Date & Time Due:</label>
+            <label>Date & Time Due:</label>
                 <!--<input type="datetime-local" id="dueDT" name="DueDT" step=1>-->
                 {{ form.datetimeDue }}
             <br><br>
 
             <h6>Please Choose Files to Upload</h6>
-                    <input type="file" id="myFile" name="filename" multiple>
-
+                    <!--<input type="file" id="myFile" name="filename" multiple>-->
+                    {{ form.uploadFile }}
             <input type="submit">
 
         </form>
+
     </div>
 </body>
 
