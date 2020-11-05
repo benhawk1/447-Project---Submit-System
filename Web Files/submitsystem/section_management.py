@@ -86,6 +86,7 @@ def remove_assignment(section, name, coll_name):
     for doc in collection.find({}):
         if doc["section"] == section: #find correct section
             for i in range(len(doc["assignments"])):
+                #look for matching assignment to remove
                 if doc["assignments"][i]["filename"] == name:
 
                     new_doc = doc
