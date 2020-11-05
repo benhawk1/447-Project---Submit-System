@@ -76,6 +76,7 @@ def submit(request):
     return render(request, 'submitsystem/submissionPage.html', {'form': form, 'fileSubmitted' : fileSubmitted})
 
 # student manager page
+# @login_required (to be added next iteration)
 def studentmanager(request):
     # if this is a POST request, process the form data
     if request.method == 'POST':
@@ -110,6 +111,8 @@ def studentmanager(request):
 
     return render(request, 'submitsystem/studentManagementPage.html', {'form': form})
 
+# assignments page
+# @login_required (to be added next iteration)
 def assignments(request):
     # if this is a POST request, process the form data
     if request.method == 'POST':
@@ -149,6 +152,7 @@ def assignments(request):
     return render(request, 'submitsystem/AssignmentPage.html', {'form' : form})
 
 # Home Page table:
+# @login_required (to be added next iteration)
 class homeTable(TemplateView):
     template_name = 'submitsystem/newHomePage.html'
 
