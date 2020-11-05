@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from .forms import LoginForm, SubmitForm
+from .forms import LoginForm, SubmitForm, StudentForm
 from submitsystem.submission_backend import *
 from submitsystem.db_func import *
 from submitsystem.section_management import *
@@ -76,7 +76,30 @@ def submit(request):
 
 # student manager page
 def studentmanager(request):
-    return render(request, 'submitsystem/studentManagementPage.html')
+    # if this is a POST request, process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = StudentForm(request.POST) #request.FILES
+
+        # check whether it's valid:
+        if form.is_valid():
+            # process the input
+            addRemove = form.cleaned_data['addRemove']
+            classNum = form.cleaned_data['classNum']
+            section = form.cleaned_data['section']
+            firstName = form.cleaned_data['firstName']
+            lastName = form.cleaned_data['lastName']
+            #email = form.cleaned_data['email'] email replaced with id to match backend
+            id = form.cleaned_data['id']
+            print(addRemove, classNum, section, firstName, lastName, id)
+            add_section(section, 'sections_test')
+            add_student(id, f'{firstName} {lastName}', section, 'sections_test')
+
+    # if a GET (or any other method) create a blank form
+    else:
+        form = StudentForm()
+
+    return render(request, 'submitsystem/studentManagementPage.html', {'form': form})
 
 # Home Page table:
 class homeTable(TemplateView):
