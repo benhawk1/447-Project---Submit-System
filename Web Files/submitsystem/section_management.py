@@ -1,6 +1,3 @@
-import pymongo
-import base64
-import bson
 import os
 from bson.binary import Binary
 from db_func import *

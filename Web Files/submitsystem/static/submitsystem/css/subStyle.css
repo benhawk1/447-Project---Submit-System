@@ -63,6 +63,9 @@ body{
     border-radius: 1em;
     color: black;
 }
+h2{
+    text-align: center;
+}
 
 .submission-box{
     background: black;

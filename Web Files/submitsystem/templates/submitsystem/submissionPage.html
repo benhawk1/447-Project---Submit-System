@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-    <title>MyUMBC Submission System</title>
+    <title>Submit Page</title>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'submitsystem/css/contactStyle.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'submitsystem/css/subStyle.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 <body>
@@ -22,45 +21,33 @@
             </ul>
         </div>
     </nav>
-    <br><br>
+
+    <section id="showcase">
+        <div class="container">
+        </div>
+    </section>
+
     <div class="container">
         <section id="main">
-            <h2>Welcome to the Contact Page</h2>
+            <h2>Welcome to the Submission Page</h2>
 
         </section>
 
-    </div><br><br>
+    </div>
 
-    <table class="center">
-  <tr>
-    <th>Developer</th>
-    <th>UMBC E-mail</th>
-  </tr>
-  <tr>
-    <td>Ben Hawkins</td>
-    <td>benhawk1@umbc.edu</td>
-  </tr>
-  <tr>
-    <td>Carly Heiner</td>
-    <td>carly6@umbc.edu</td>
-  </tr>
-  <tr>
-    <td>Jamar Reeves</td>
-    <td>jreeves2@umbc.edu</td>
-  </tr>
-  <tr>
-    <td>Nicholas Proulx</td>
-    <td>nproulx1@umbc.edu</td>
-  </tr>
-  <tr>
-    <td>Zach Federici</td>
-    <td>zfed1@umbc.edu</td>
-  </tr>
-</table>
+    <div class="submission-box">
+        <h6>Please Choose Files to Upload</h6>
+         <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form }}
+                <!--<input type="file" id="myFile" name="filename" multiple>-->
+                <input type="submit">
+         </form>
+        <b>{{fileSubmitted}}</b>
+    </div>
 
-    </body>
-<!-- Footer for the page -->
-<footer id="main-footer">
-        <p>Copyright &copy; Virtual Victory</p>
-</footer>
+    <footer id="main-footer">
+        <p>Copyright &copy; 2020 Virtual Victory</p>
+    </footer>
+</body>
 </html>
