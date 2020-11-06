@@ -13,24 +13,25 @@ class SubmitForm(forms.Form):
 
 # get student data to add or remove from student management page
 class StudentForm(forms.Form):
-    addRemove = forms.ChoiceField(choices=[("Add", "Add"), ("Remove", "Remove")], required=False)
-    classNum = forms.IntegerField(required=False)
+    addRemove = forms.ChoiceField(choices=[("Add", "Add"), ("Remove", "Remove")])
+    classNum = forms.IntegerField()
     sectionChoices = []
     for i in range(1, 5):
         sectionChoices.append((i, f'Section {i}'))
-    section = forms.ChoiceField(widget=forms.RadioSelect(attrs={"class" : "radio-inline"}), choices=sectionChoices, required=False)
-    firstName = forms.CharField(required=False)
-    lastName = forms.CharField(required=False)
+    section = forms.ChoiceField(choices=sectionChoices)
+    firstName = forms.CharField()
+    lastName = forms.CharField()
     id = forms.CharField()
-    #email = forms.CharField(widget=forms.EmailInput, required=False)
-    #roster = forms.FileField(label='', required=False)
+    #email = forms.CharField(widget=forms.EmailInput, required=False) replaced with id
+    #roster = forms.FileField(label='', required=False) not yet supported
 
 class AssignmentForm(forms.Form):
-    createRemove = forms.ChoiceField(choices=[("Create", "Create"), ("Remove", "Remove")], required=False)
-    classNum = forms.IntegerField(required=False)
+    createRemove = forms.ChoiceField(choices=[("Create", "Create"), ("Remove", "Remove")])
+    classNum = forms.IntegerField()
     sectionChoices = []
     for i in range(1, 5):
         sectionChoices.append((i, f'Section {i}'))
-    section = forms.MultipleChoiceField(widget=forms.RadioSelect(attrs={"class": "radio-inline"}), choices=sectionChoices, required = False)
-    assignmentName = forms.CharField(required=False)
-    datetimeDue = forms.DateTimeField(required=False)
+    section = forms.ChoiceField(choices=sectionChoices)
+    assignmentName = forms.CharField()
+    datetimeDue = forms.DateTimeField()
+    uploadFile = forms.FileField(label='')
