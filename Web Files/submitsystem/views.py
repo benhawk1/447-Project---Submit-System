@@ -105,6 +105,7 @@ def studentmanager(request):
             else:
                 remove_student(id, section, classNum)
 
+
     # if a GET (or any other method) create a blank form
     else:
         form = StudentForm()
@@ -142,8 +143,6 @@ def assignments(request):
             else:
                 remove_assignment(section, path, classNum)
 
-        else:
-            print("invalid")
 
     # if a GET (or any other method) create a blank form
     else:
