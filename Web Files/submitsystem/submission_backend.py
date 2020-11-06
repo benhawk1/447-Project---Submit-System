@@ -2,7 +2,7 @@ import pytz
 import os
 from bson.binary import Binary
 from datetime import datetime
-from db_func import *
+from submitsystem.db_func import *
 
 #####################
 ###Constants

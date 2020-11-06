@@ -1,6 +1,6 @@
 import os
 from bson.binary import Binary
-from db_func import *
+from submitsystem.db_func import *
 #####################
 ###Constants
 #####################
