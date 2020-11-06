@@ -1,0 +1,157 @@
+<!-- Declare doctype and set title, link to css file and bootstrap-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MyUMBC Submission System</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'submitsystem/css/newHomePage.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+
+<body>
+<!-- header for the page -->
+    <header id="main-header">
+        <div class="container2">
+            <h1>MyUMBC Submission System</h1>
+        </div>
+    </header>
+
+<!-- navbar for the page, hrefs potential to be changed across website -->
+    <nav id="navbar">
+        <div class="container">
+            <ul>
+                <li><a href="/submitsystem/home/">Home</a></li>
+                <li><a href="/submitsystem/contact/">Contact</a></li>
+                <li><a href="/submitsystem/submit/">Submit</a></li>
+                <li><a href="/submitsystem/studentmanager/">Student Manager</a></li>
+                <li><a href="/submitsystem/assignments/">Assignments</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="showcase">
+        <div class="container">
+        </div>
+    </section>
+
+    <div class="container">
+        <section id="main">
+            <h1>Welcome to the Class Roster Page</h1>
+
+        </section>
+
+    </div>
+    <!--
+    <table class="scrolldown">
+    <rosterhead>
+  <tr>
+    <th>Class Number</th>
+    <th>Section</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>E-Mail</th>
+  </tr>
+  </rosterhead>
+  <rosterbody>
+  <!--row one
+  <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+  </tr>
+  <!--row two
+  <tr>
+    <td>Centro comercial Moctezuma</td>
+    <td>Francisco Chang</td>
+    <td>Mexico</td>
+  </tr>
+  <!--row three
+  <tr>
+    <td>Ernst Handel</td>
+    <td>Roland Mendel</td>
+    <td>Austria</td>
+  </tr>
+  <!-- row four
+  <tr>
+    <td>Island Trading</td>
+    <td>Helen Bennett</td>
+    <td>UK</td>
+  </tr>
+  <!-- row five
+  <tr>
+    <td>Laughing Bacchus Winecellars</td>
+    <td>Yoshi Tannamuri</td>
+    <td>Canada</td>
+  </tr>
+  <!-- Row six
+  <tr>
+    <td>Magazzini Alimentari Riuniti</td>
+    <td>Giovanni Rovelli</td>
+    <td>Italy</td>
+  </tr>
+  <!--row seven
+  <tr>
+  <td>USA</td>
+  </tr>
+    <!--row eight
+  <tr>
+  <td>USA</td>
+  </tr>
+    <!--row nine
+  <tr>
+  <td>USA</td>
+  </tr>
+    <!--row ten
+  <tr>
+  <td>USA</td>
+  </tr>
+    <!--row eleven
+  <tr>
+  <td>USA</td>
+  </tr>
+    <!--row twelve
+  <tr>
+  <td>USA</td>
+  </tr>
+    <!--row thirteen
+  <tr>
+  <td>USA</td>
+  </tr>
+    <!--row fouteen
+  <tr>
+  <td>USA</td>
+  </tr>
+    <!--row fifteen
+  <tr>
+  <td>USA</td>
+  </tr>
+  </rosterbody>
+</table>
+-->
+<!-- table to be displayed on the page-->
+<table class="table">
+    <thead>
+        <tr>
+            {% for k in rosterhead %}
+            <th>{{k}}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in rosterbody %}
+            <tr>
+                <td>{{r.classname}}</td>
+                <td>{{r.section}}</td>
+                <td>{{r.firstName}}</td>
+                <td>{{r.lastName}}</td>
+                <td>{{r.email}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<!-- Footer for the page -->
+   <footer id="main-footer">
+        <p>Copyright &copy; 2020 MyUMBC Submission System </p>
+    </footer>
+</body>
+</html>

@@ -1,4 +1,4 @@
-body{
+body {
     background-image: url('../images/grayflag.jpg');
     background-color: #fdb515;
     color: white;
@@ -8,42 +8,73 @@ body{
     margin: 0;
 }
 
-.container{
-    width:80%;
-    margin:auto;
+.container {
+    width: 80%;
+    margin: auto;
     overflow: hidden;
     color: black;
 }
 
-.container2{
-    width:80%;
-    margin:auto;
+.container2 {
+    width: 80%;
+    margin: auto;
     overflow: hidden;
     color: #fdb515;
 }
 
-
-#main-header{
+#main-header {
     background-color: black;
     color: #fdb515;
 }
 
-#navbar{
+#navbar {
     background-color: #fdb515;
     color: black;
 }
 
-table, th, td{
+/* show list items so they're in a row, not a column */
+#navbar li{
+    display: inline;
+}
+
+#navbar ul {
+    padding: 5px;
+    list-style: none;
+}
+
+#navbar a {
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 5px;
+}
+
+table,
+th,
+td {
     border: 1px solid black;
 }
 
-table.center{
+table.center {
     margin-left: auto;
     margin-right: auto;
 }
 
-.contact-table{
-    border:1px solid black;
-    margin-left:auto;
-    margin-right:auto;
+
+.contact-table {
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+#main-footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
 }
