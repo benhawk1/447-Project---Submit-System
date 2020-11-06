@@ -4,7 +4,8 @@
 <html lang="en">
 <head>
     <title>Assignment Page</title>
-    <link rel="stylesheet" type="text/css" href="css/assignmentStyle.css">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'submitsystem/css/assignmentStyle.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 <body>
@@ -19,8 +20,11 @@
     <nav id="navbar">
         <div class="container">
             <ul>
-                <li><a href="newHomePage.html">Home</a></li>
-                <li><a href="contactPage.html">Contact</a></li>
+                <li><a href="/submitsystem/home/">Home</a></li>
+                <li><a href="/submitsystem/contact/">Contact</a></li>
+                <li><a href="/submitsystem/submit/">Submit</a></li>
+                <li><a href="/submitsystem/studentmanager/">Student Manager</a></li>
+                <li><a href="/submitsystem/assignments/">Assignments</a></li>
             </ul>
         </div>
     </nav>
@@ -39,20 +43,24 @@
     </div><br><br>
 
    <div class="submission-box">
-        <form action="/action_page.php">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
 
-             <label for="CreateRemove">Create/Remove Assignment:</label>
-                <select name="CreateRemove" id="CreateRemove">
+             <label> Create/Remove Assignment:</label>
+                <!--<select name="CreateRemove" id="CreateRemove">
                     <option value="Create">Create</option>
                     <option value="Remove">Remove</option>
-                </select>
+                </select>-->
+                {{ form.createRemove }}
             <br><br>
 
-            <label for="classNum">Class Number:</label>
-                <input type="number" name="classNum" id="classNum">
+            <label class="classNum">Class Number:</label>
+                <!--<input type="number" name="classNum" id="classNum"> -->
+                {{ form.classNum}}
             <br><br>
 
-            <input type="checkbox" id="section1" name="section1" value="Section1">
+            {{ form.section }}
+            <!--<input type="checkbox" id="section1" name="section1" value="Section1">
             <label for="section1">Section 1 &nbsp</label>
             <input type="checkbox" id="section2" name="section2" value="Section2">
             <label for="section1">Section 2 &nbsp</label>
@@ -60,23 +68,29 @@
             <label for="section1">Section 3 &nbsp</label>
             <input type="checkbox" id="section4" name="section4" value="Section4">
             <label for="section1">Section 4 &nbsp</label>
+            -->
 
             <br><br>
 
-            <label for="assignmentName">Name of Assignment:</label>
-                <input type="text" name="assignmentName" id="assignmentName">
+            <label>Name of Assignment:</label>
+                <!--<input type="text" name="assignmentName" id="assignmentName">-->
+                {{ form.assignmentName }}
             <br><br>
 
-            <label for="dueDT">Date & Time Due:</label>
-                <input type="datetime-local" id="dueDT" name="DueDT" step=1>
+            <label>Date & Time Due:</label>
+
+                <!--<input type="datetime-local" id="dueDT" name="DueDT" step=1>-->
+                {{ form.datetimeDue }}
             <br><br>
 
             <h6>Please Choose Files to Upload</h6>
-                    <input type="file" id="myFile" name="filename" multiple>
 
+                    <!--<input type="file" id="myFile" name="filename" multiple>-->
+                    {{ form.uploadFile }}
             <input type="submit">
 
         </form>
+
     </div>
 </body>
 

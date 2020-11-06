@@ -4,7 +4,8 @@
 <html lang="en">
 <head>
     <title>Student Manager</title>
-    <link rel="stylesheet" type="text/css" href="css/studManStyle.css">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'submitsystem/css/studManStyle.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     </head>
 <body>
@@ -19,8 +20,11 @@
     <nav id="navbar">
         <div class="container">
             <ul>
-                <li><a href="newHomePage.html">Home</a></li>
-                <li><a href="contactPage.html">Contact</a></li>
+                <li><a href="/submitsystem/home/">Home</a></li>
+                <li><a href="/submitsystem/contact/">Contact</a></li>
+                <li><a href="/submitsystem/submit/">Submit</a></li>
+                <li><a href="/submitsystem/studentmanager/">Student Manager</a></li>
+                <li><a href="/submitsystem/assignments/">Assignments</a></li>
             </ul>
         </div>
     </nav>
@@ -38,46 +42,51 @@
     </div><br><br>
 
     <div class="submission-box">
-        <form action="/action_page.php">
-
-            <label for="AddRemove">Add/Remove Student(s):</label>
-                <select name="AddRemove" id="AddRemove">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label>Add/Remove Student(s):</label>
+                <!--for="AddRemove"<select name="AddRemove" id="AddRemove">
                     <option value="Add">Add</option>
                     <option value="Remove">Remove</option>
-                </select>
+                </select>-->
+                {{ form.addRemove }}
             <br><br>
 
             <label class="classNum">Class Number:</label>
-                <input type="number" name="classNum" id="classNum">
+                <!--<input type="number" name="classNum" id="classNum">-->
+                {{ form.classNum }}
             <br><br>
 
-
-            <input type="radio" name="sectionNum">
+            {{ form.section }}
+            <!--<input type="radio" name="sectionNum">
             <label class="radio-inline">Section 1 &nbsp</label>
             <input type="radio" name="sectionNum">
             <label class="radio-inline">Section 2 &nbsp</label>
             <input type="radio" name="sectionNum">
             <label class="radio-inline">Section 3 &nbsp</label>
             <input type="radio" name="sectionNum">
-            <label class="radio-inline">Section 4 &nbsp</label>
+            <label class="radio-inline">Section 4 &nbsp</label>-->
 
             <br><br>
 
-            <label for="firstName">First Name:</label>
-                <input type="text" name="firstName" id="firstName">
+            <label>First Name:</label>
+                <!-- for="firstName"<input type="text" name="firstName" id="firstName">-->
+                {{ form.firstName }}
             <br>
 
-            <label for="lastName">Last Name:</label>
-                <input type="text" name="lastName" id="lastName">
+            <label>Last Name:</label>
+                <!-- for="lastName"<input type="text" name="lastName" id="lastName">-->
+                {{ form.lastName }}
             <br>
 
-            <label for="MyUMBCEmail">Email: &nbsp &nbsp &emsp;</label>
-                <input type="text" name="MyUMBCEmail" id="MyUMBCEmail">
+            <label>ID:<!--Email:--> &nbsp &nbsp &emsp;</label>
+                <!-- for="MyUMBCEmail"<input type="text" name="MyUMBCEmail" id="MyUMBCEmail">-->
+                {{ form.id }}
             <br><br>
 
             <h6>Please Choose Student Roster CSV</h6>
                     <input type="file" id="myFile" name="filename">
-
+                    <!--{{ form.roster }}-->
             <input type="submit">
 
         </form>
