@@ -49,8 +49,8 @@ def addStudent(course, section, email, firstName, lastName, userName):
 
         # Ensures that the section and class are not duplicated
         for i in range(len(classes)):
-            if classes[i] == course:
-                if sections[i] == section:
+            if str(classes[i]) == str(course):
+                if str(sections[i]) == str(section):
                     return -2
 
         # Adds the new class to the list, and saves it to the file
@@ -157,4 +157,7 @@ def removeStudent(course, section, email):
         # Saves the updated list of sections
         sections = ",".join(sections)
         loginInfo.at[rowNumber, 'Sections'] = sections
+
+        # Saves the csv
+        loginInfo.to_csv("C:/Users/benha/Documents/CMSC 447 Project/Users.csv", mode='w', index=False)
     return 1
