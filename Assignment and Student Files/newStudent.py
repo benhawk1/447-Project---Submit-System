@@ -8,18 +8,22 @@ Created on Fri Oct  9 20:33:19 2020
 # taken as an argument, the csv file will be read into a dataframe and all the students inside will be added to the
 # specified classes. If an email is taken as an argument, then the individual student connected to that email will be
 # added to the specified class
-
+from random import randint
 import pandas as pd
 import numpy as np
+import hashing
 
 loginInfo = pd.read_csv("C:/Users/benha/Documents/CMSC 447 Project/Users.csv")
 loginInfo = loginInfo.fillna("NA")
 
 
 # A function used to add an individual student to a class by email
-def addStudent(course, section, email):
+def addStudent(course, section, email, firstName, lastName, userName):
     # Checks if the email currently exists in the system
     userExists = loginInfo['Email'].isin([email]).any()
+
+    if isinstance(firstName, int) or isinstance(lastName, int):
+        return -1
 
     # If the user exists, attempts to add the student to the system
     if userExists:
@@ -29,7 +33,6 @@ def addStudent(course, section, email):
         sections = str(loginInfo.at[rowNumber, 'Sections'])
         classes = list(classes.split(","))
         sections = list(sections.split(","))
-        role = loginInfo.at[rowNumber, 'Role']
 
         # If the user had no classes, clears the list
         if "NA" in classes:
@@ -44,17 +47,10 @@ def addStudent(course, section, email):
             if sections[i].endswith('.0'):
                 sections[i] = sections[i].replace('.0', '')
 
-        # If the user is a professor, ensures that the section and class are not duplicated
-        if role == 'P':
-            for i in range(len(classes)):
-                if classes[i] == course:
-                    if sections[i] == section:
-                        return -2
-
-        # If the user is a student, ensures that they are not in the same class twice
-        if role == 'S':
-            for i in range(len(classes)):
-                if classes[i] == course:
+        # Ensures that the section and class are not duplicated
+        for i in range(len(classes)):
+            if classes[i] == course:
+                if sections[i] == section:
                     return -2
 
         # Adds the new class to the list, and saves it to the file
@@ -70,6 +66,13 @@ def addStudent(course, section, email):
         # Saves the csv
         loginInfo.to_csv("C:/Users/benha/Documents/CMSC 447 Project/Users.csv", mode='w', index=False)
 
+        return 1
+    else:
+        password = randint(10000000,99999999)
+        name = firstName + " " + lastName
+        loginInfo.loc[len(loginInfo.index)] = [name, 'S', userName, str(password), 1, email, course, section]
+        rowNumber = int(loginInfo[loginInfo['Email'] == email].index[0])
+        hashing.encode(str(password), rowNumber, loginInfo)
         return 1
     return -1
 
@@ -95,7 +98,7 @@ def getStudentInfo(row):
     myClasses = list(set(classes))
     myClassesCount = len(myClasses)
 
-    # Prints possible classes, and obtains a class for assignment creation
+    # Prints possible classes, and obtains a class for student addition
     print("The list of potential classes to assign this student to are as follows:")
     for i in range(myClassesCount):
         print(myClasses[i])
@@ -103,7 +106,7 @@ def getStudentInfo(row):
     while chosenClass not in classes:
         chosenClass = input("Invalid class. Please enter a valid class: ")
 
-    # Prints possible sections, and obtains the section (or all) for assignment creation
+    # Prints possible sections, and obtains the section for student addition
     eligibleSections = []
     print("The list of sections for " + chosenClass + " are as follows:")
     count = 0
@@ -119,6 +122,39 @@ def getStudentInfo(row):
     addStudent(chosenClass, chosenSection, email)
 
 
-#A blank function that will be used to add csv files once we obtain the proper format
-def addStudents(course, section, students):
+def addStudents(students):
+    for row in students.itertuples():
+        firstName = row[2]
+        lastName = row[1]
+        email = row[7]
+        classKey = row[11]
+        sectionKey = row[12]
+        id = row[6]
+
+        addStudent(classKey, sectionKey, email, firstName, lastName, id)
     return 0
+
+
+def removeStudent(course, section, email):
+    userExists = loginInfo['Email'].isin([email]).any()
+    if not userExists:
+        return -1
+    rowNumber = int(loginInfo[loginInfo['Email'] == email].index[0])
+    classes = str(loginInfo.at[rowNumber, 'Classes'])
+    sections = str(loginInfo.at[rowNumber, 'Sections'])
+    classes = list(classes.split(","))
+    sections = list(sections.split(","))
+    if course in classes:
+        # Removes the specified class and section from the student
+        courseIndex = classes.index(course)
+        del classes[courseIndex]
+        del section[courseIndex]
+
+        # Saves the updated list of classes
+        classes = ",".join(classes)
+        loginInfo.at[rowNumber, 'Classes'] = classes
+
+        # Saves the updated list of sections
+        sections = ",".join(sections)
+        loginInfo.at[rowNumber, 'Sections'] = sections
+    return 1
