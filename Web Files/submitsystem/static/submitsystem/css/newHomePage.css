@@ -54,6 +54,10 @@ body {
     padding: 5px;
 }
 
+h2{
+    text-align: center;
+}
+
 /*adds the UMBC dog image*/
 #showcase {
     display: block;
@@ -154,11 +158,10 @@ td {
     box-sizing: border-box;
 }
 /* gray footer fixed to the bottom of the page */                
-#main-footer {
-    /*position: fixed;
-    left: auto;
-    bottom: auto;*/
-    margin:auto;
+#main-footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
     width: 100%;
     background: #333;
     color: #fff;

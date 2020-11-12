@@ -78,6 +78,8 @@ def submit(request):
 # student manager page
 # @login_required (to be added next iteration)
 def studentmanager(request):
+
+    studentAction = ""
     # if this is a POST request, process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -102,19 +104,24 @@ def studentmanager(request):
             # add the student or remove them if add is not selected
             if addRemove == "Add":
                 add_student(id, f'{firstName} {lastName}', section, classNum)
+                studentAction = "Student Successfully Added"
             else:
                 remove_student(id, section, classNum)
+                studentAction = "Student Successfully Removed"
 
 
     # if a GET (or any other method) create a blank form
     else:
         form = StudentForm()
 
-    return render(request, 'submitsystem/studentManagementPage.html', {'form': form})
+    return render(request, 'submitsystem/studentManagementPage.html', {'form': form, 'studentAction' : studentAction})
 
 # assignments page
 # @login_required (to be added next iteration)
 def assignments(request):
+
+    assignmentAction = ""
+
     # if this is a POST request, process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -140,15 +147,18 @@ def assignments(request):
             # create assignment or remove assignment if create is not selected
             if createRemove == "Create":
                 add_assignment(section, path, datetimeDue, classNum)
+                assignmentAction = "Assignment Successfully Created"
             else:
                 remove_assignment(section, path, classNum)
-
+                assignmentAction = "Assignment Successfully Removed"
+        else:
+            print("Didn't work")
 
     # if a GET (or any other method) create a blank form
     else:
         form = AssignmentForm()
 
-    return render(request, 'submitsystem/AssignmentPage.html', {'form' : form})
+    return render(request, 'submitsystem/AssignmentPage.html', {'form' : form, 'assignmentAction' : assignmentAction})
 
 # Home Page table:
 # @login_required (to be added next iteration)
