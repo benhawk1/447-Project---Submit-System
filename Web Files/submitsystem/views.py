@@ -114,7 +114,7 @@ def studentmanager(request):
     else:
         form = StudentForm()
 
-    return render(request, 'submitsystem/studentManagementPage.html', {'form': form})#, 'studentAction' : studentAction})
+    return render(request, 'submitsystem/studentManagementPage.html', {'form': form, 'studentAction' : studentAction})
 
 # assignments page
 # @login_required (to be added next iteration)
@@ -157,7 +157,7 @@ def assignments(request):
     else:
         form = AssignmentForm()
 
-    return render(request, 'submitsystem/AssignmentPage.html', {'form' : form})#, 'assignmentAction' : assignmentAction})
+    return render(request, 'submitsystem/AssignmentPage.html', {'form' : form, 'assignmentAction' : assignmentAction})
 
 # Home Page table:
 # @login_required (to be added next iteration)
