@@ -33,7 +33,7 @@ class AssignmentForm(forms.Form):
         sectionChoices.append((i, f'Section {i}'))
     section = forms.ChoiceField(choices=sectionChoices)
     assignmentName = forms.CharField()
-    date = forms.DateTimeField(
+    datetimeDue = forms.DateTimeField(
         input_formats=['%d/%m/%Y %H:%M'],
         widget=forms.DateTimeInput(attrs={
             'class': 'form-control datetimepicker-input',

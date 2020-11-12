@@ -95,18 +95,21 @@
 
                 <!--<input type="datetime-local" id="dueDT" name="DueDT" step=1>-->
                <!-- {{ form.date }} -->
-            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-      <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
-      <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-      </div>
-    </div>
+        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+  {{ form.datetimeDue }}
+  <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+  </div>
+</div>
 
-    <script>
-      $(function () {
-        $("#datetimepicker1").datetimepicker();
-      });
-    </script>
+<script>
+  $(function () {
+    $("#datetimepicker1").datetimepicker({
+      format: 'DD/MM/YYYY HH:mm',
+    });
+  });
+</script>
+
             <br><br>
 
             <h6>Please Choose Files to Upload</h6>

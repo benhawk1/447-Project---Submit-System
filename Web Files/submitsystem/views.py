@@ -151,7 +151,8 @@ def assignments(request):
             else:
                 remove_assignment(section, path, classNum)
                 assignmentAction = "Assignment Successfully Removed"
-
+        else:
+            print("Didn't work")
 
     # if a GET (or any other method) create a blank form
     else:
