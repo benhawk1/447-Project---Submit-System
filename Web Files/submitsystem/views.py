@@ -6,6 +6,7 @@ from .forms import LoginForm, SubmitForm, StudentForm, AssignmentForm
 from submitsystem.submission_backend import *
 from submitsystem.db_func import *
 from submitsystem.section_management import *
+from submitsystem.authentication import *
 from django.views.generic.base import TemplateView
 
 # write submitted file to uploads folder
@@ -26,11 +27,15 @@ def index(request):
         # check whether it's valid:
         if form.is_valid():
             # process the input
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
+            user = form.cleaned_data['username']
+            passw = form.cleaned_data['password']
+            print(user)
+            print(passw)
+            user = authenticate(username=user, password=passw)
+            if user is not None:
+                # assume correct login for now and redirect to home page
+                return HttpResponseRedirect('home/')
 
-            # assume correct login for now and redirect to home page
-            return HttpResponseRedirect('home/')
 
     # if a GET (or any other method) create a blank form
     else:
@@ -78,8 +83,6 @@ def submit(request):
 # student manager page
 # @login_required (to be added next iteration)
 def studentmanager(request):
-
-    studentAction = ""
     # if this is a POST request, process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -104,24 +107,19 @@ def studentmanager(request):
             # add the student or remove them if add is not selected
             if addRemove == "Add":
                 add_student(id, f'{firstName} {lastName}', section, classNum)
-                studentAction = "Student Successfully Added"
             else:
                 remove_student(id, section, classNum)
-                studentAction = "Student Successfully Removed"
 
 
     # if a GET (or any other method) create a blank form
     else:
         form = StudentForm()
 
-    return render(request, 'submitsystem/studentManagementPage.html', {'form': form, 'studentAction' : studentAction})
+    return render(request, 'submitsystem/studentManagementPage.html', {'form': form})
 
 # assignments page
 # @login_required (to be added next iteration)
 def assignments(request):
-
-    assignmentAction = ""
-
     # if this is a POST request, process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -147,18 +145,15 @@ def assignments(request):
             # create assignment or remove assignment if create is not selected
             if createRemove == "Create":
                 add_assignment(section, path, datetimeDue, classNum)
-                assignmentAction = "Assignment Successfully Created"
             else:
                 remove_assignment(section, path, classNum)
-                assignmentAction = "Assignment Successfully Removed"
-        else:
-            print("Didn't work")
+
 
     # if a GET (or any other method) create a blank form
     else:
         form = AssignmentForm()
 
-    return render(request, 'submitsystem/AssignmentPage.html', {'form' : form, 'assignmentAction' : assignmentAction})
+    return render(request, 'submitsystem/AssignmentPage.html', {'form' : form})
 
 # Home Page table:
 # @login_required (to be added next iteration)
