@@ -44,6 +44,8 @@ In order to run all code and tests for this iteration of the project, the follow
 
 -Django 3.1.2 
 
+-django-crispy-forms
+
 -The latest version of MongoDB
 
 -An established instance of MongoDB
