@@ -6,6 +6,7 @@ from .forms import LoginForm, SubmitForm, StudentForm, AssignmentForm
 from submitsystem.submission_backend import *
 from submitsystem.db_func import *
 from submitsystem.section_management import *
+from submitsystem.authentication import *
 from django.views.generic.base import TemplateView
 
 # write submitted file to uploads folder
@@ -28,9 +29,10 @@ def index(request):
             # process the input
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-
-            # assume correct login for now and redirect to home page
-            return HttpResponseRedirect('home/')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                # redirects to homepage if correct password
+                return HttpResponseRedirect('home/')
 
     # if a GET (or any other method) create a blank form
     else:
