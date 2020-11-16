@@ -57,7 +57,9 @@
                 {{ form.classNum }}
             <br><br>
 
-            {{ form.section }}
+            {% load crispy_forms_tags %}
+            {{ form.section|as_crispy_field  }}
+            <!--{{ form.section }}-->
             <!--<input type="radio" name="sectionNum">
             <label class="radio-inline">Section 1 &nbsp</label>
             <input type="radio" name="sectionNum">

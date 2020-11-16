@@ -73,7 +73,9 @@
                 {{ form.classNum}}
             <br><br>
 
-            {{ form.section }}
+            {% load crispy_forms_tags %}
+            {{ form.section|as_crispy_field  }}
+            <!--{{ form.section }}-->
             <!--<input type="checkbox" id="section1" name="section1" value="Section1">
             <label for="section1">Section 1 &nbsp</label>
             <input type="checkbox" id="section2" name="section2" value="Section2">

@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
 ]
 
 STATICFILES_DIRS = [str(BASE_DIR) + '/submitsystem/static/'] # added to allow django to find css and image files
