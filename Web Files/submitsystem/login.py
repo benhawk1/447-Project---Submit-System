@@ -15,7 +15,8 @@ import os
 
 
 # Function that checks if the user's login information is accurate.
-def loginValidation(user, passcode, df):
+def loginValidation(user, passcode):
+    df = pd.read_csv("submitsystem/Users.csv")
     valid = False
     userExists = df['Username'].isin([user]).any()
     if userExists:

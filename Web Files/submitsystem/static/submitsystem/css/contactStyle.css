@@ -49,6 +49,10 @@ body {
     padding: 5px;
 }
 
+h2{
+    text-align: center;
+}
+
 table,
 th,
 td {

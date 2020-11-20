@@ -1,4 +1,6 @@
 import pandas as pd
+import datetime
+from section_management import *
 
 # Obtains a specified class, section(s), due date, due time, and name for a given assignment, for it to then be passed
 # To the database as needed.
@@ -8,6 +10,10 @@ def addAssignment(row, df):
     sections = str(df.at[row, 'Sections'])
     classes = list(classes.split(","))
     sections = list(sections.split(","))
+
+
+   
+    
     maxCount = len(classes)
 
     # Obtains a list of all unique classes taught by the current user
@@ -32,6 +38,7 @@ def addAssignment(row, df):
             eligibleSections.append(sections[i])
             count = count + 1
     chosenSection = input("Please enter a section number or \'All\': ")
+    print(eligibleSections)
     while (chosenSection not in eligibleSections) and (chosenSection != "All"):
         chosenSection = input("Invalid section choice. Please enter a valid section: ")
 
@@ -72,6 +79,15 @@ def addAssignment(row, df):
     print("Assignment: " + assignmentName)
     print("Date: " + Month + "-" + Day + "-" + Year)
     print("Time: " + Hour + ":" + Minute)
+
+    #convert duedate strings to single datetime object
+    datetime = duedate_to_datetime(Month, Day, Year, Hour, Minute)
+
+    #function call from section_management
+    ret_val = add_assignment(chosenSection, assignmentName, datetime, chosenClass)
+    if ret_val < 0:
+        print("Error occurred: add_assignment")
+    
 
 
 # Ensures that the date given meets the proper requirements
@@ -118,3 +134,25 @@ def dueTimeValidation(dueTime):
     if int(dueTime[1]) not in range(0, 60):
         return -4
     return 0
+
+# Converts string of date and time to datetime object for easier use in future
+def duedate_to_datetime(Month, Day, Year, Hour, Minute):
+    #prepare string for conversion to datetime
+    duedate_str = str(Year) + "-" + str(Month) + "-" + str(Day) + " " + str(Hour) + ":" + str(Minute)
+
+    #format input string into datetime object
+    date_time_obj = datetime.datetime.strptime(duedate_str, '%Y-%m-%d %H:%M')
+
+
+    print("date time object test: ")
+    print('Date:', date_time_obj.date())
+    print('Time:', date_time_obj.time())
+    print('Date-time:', date_time_obj)
+
+    return date_time_obj
+    
+
+
+
+
+

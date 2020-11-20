@@ -4,72 +4,79 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.test import Client
+from django.contrib.auth.models import User
+
+# user that will be logged in for the majority of tests
+client = Client()
+
+# tests login and page restriction, run before the other iterations' test to include a user that is not logged in yet
+class Iteration3Tests(TestCase):
+
+    #  try to vist home page without logging in
+    def test_not_logged_in(self):
+        client = Client()
+        response = client.get(reverse("home"))
+        self.assertEqual(response.status_code, 302)
+
+    # login (this will allow the client to be logged in for the rest of the tests)
+    def test_logged_in(self):
+        response = client.post(reverse("index"), username="John1", password="Eggs")
+        self.assertEqual(response.status_code, 200)
+
 
 # test submitsystem urls, views, and forms
 class Iteration1Tests(TestCase):
 
-    # visit login page and enter username and password
-    def test_login(self):
-        client = Client()
-        response = self.client.post(reverse("index"), username="John1", password="Eggs")
-        self.assertIs(response.status_code, 200)
-
+    # login page changed
     # home page changed
 
     # visit contact page
     def test_contact(self):
-        client = Client()
-        response = self.client.get(reverse("contact"))
-        self.assertIs(response.status_code, 200)
+        response = client.get(reverse("contact"))
+        self.assertEqual(response.status_code, 302)
 
     # result page removed
     # submit page changed
 
 # tests get method for home, submit, student manager, and assignments page
-# tests get method for submit, student manager, and assignments page
+# tests post method for submit, student manager, and assignments page
 class Iteration2Tests(TestCase):
 
     #  visit home page
     def test_home(self):
-        client = Client()
-        response = self.client.get(reverse("home"))
-        self.assertIs(response.status_code, 200)
+        response = client.get(reverse("home"))
+        self.assertEqual(response.status_code, 302)
 
     # visit submit page
     def test_submit_get(self):
-        client = Client()
-        response = self.client.get(reverse("submit"))
-        self.assertIs(response.status_code, 200)
+        response = client.get(reverse("submit"))
+        self.assertEqual(response.status_code, 302)
 
     # submit file on submit page
     def test_submit_post(self):
-        client = Client()
-        response = self.client.post(reverse("submit"), submission=open("submitsystem/uploads/test.txt", "r"))
-        self.assertIs(response.status_code, 200)
+        response = client.post(reverse("submit"), submission=open("submitsystem/uploads/test.txt", "r"))
+        self.assertEqual(response.status_code, 302)
 
     # visit student manager page
     def test_studentmanager_get(self):
-        client = Client()
-        response = self.client.get(reverse("studentmanager"))
-        self.assertIs(response.status_code, 200)
+        response = client.get(reverse("studentmanager"))
+        self.assertEqual(response.status_code, 302)
 
     # add student on student manager page
     def test_studentmanager_post(self):
-        client = Client()
-        response = self.client.post(reverse("studentmanager"), addRemove="Add", classNum=447, section=1,
+        response = client.post(reverse("studentmanager"), addRemove="Add", classNum=447, section=1,
                                     firstName="Eric", lastName="Hamilton", id="EH999")
-        self.assertIs(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
     # visit assignments page
     def test_assignments_get(self):
-        client = Client()
-        response = self.client.get(reverse("assignments"))
-        self.assertIs(response.status_code, 200)
+        response = client.get(reverse("assignments"))
+        self.assertEqual(response.status_code, 302)
 
     # add assignment on assignments page
     def test_assignments_post(self):
-        client = Client()
-        response = self.client.post(reverse("assignments"), createRemove="Create", classNum=447, section=1,
+        response = client.post(reverse("assignments"), createRemove="Create", classNum=447, section=1,
                                     assignmentName="HW1", datetimeDue="12/30/2020",
                                     uploadFile=open("submitsystem/uploads/test.txt", "r"))
-        self.assertIs(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
+

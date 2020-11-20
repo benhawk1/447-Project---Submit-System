@@ -1,0 +1,5 @@
+﻿StudentLastName,StudentFirstName,StudentMiddleName,StudentEmpID,StudentCampusID,StudentMyUMBCID,Email,StudentPhone,AcademicLevelDescription,PrimaryInstructor,ClassNumberCatalogNumberSourceKey,ClassNumberClassSectionSourceKey,ClassEnrollStatusDescription,RegistrationDate
+Clark,Davis,Brian,NA,Clark4,Clark4,Clark4@umbc.edu,,Freshman,NA,441,3,,
+Doe,John,Adam,NA,Doe5,Doe5,Doe5@umbc.edu,,Senior,NA,341,1,,
+Wood,Elijah,Paul,NA,Eli12,Eli12,Eli12@umbc.edu,,Sophomore,NA,201,5,,
+Poppins,Mary,Jane,NA,Mary,Mary,Mary@umbc.edu,,Freshman,NA,201,4,,
