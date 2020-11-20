@@ -17,7 +17,6 @@ class SettingsBackend(BaseBackend):
     """
 
     def authenticate(self, request, username=None, password=None):
-        print("Nothing's broken yet please god")
         print(username)
         print(password)
         login_valid = loginValidation(username, password)
@@ -25,7 +24,7 @@ class SettingsBackend(BaseBackend):
             try:
                 user = User.objects.get(username=username)
             except User.DoesNotExist:
-                df = pd.read_csv("C:/Users/benha/Documents/CMSC 447 Project/Users.csv")
+                df = pd.read_csv("submitsystem/Users.csv")
                 rowNumber = int(df[df['Username'] == username].index[0])
                 role = df.at[rowNumber, 'Role']
                 # Create a new user. There's no need to set a password

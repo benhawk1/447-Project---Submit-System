@@ -87,6 +87,8 @@ AUTHENTICATION_BACKENDS = [
     'submitsystem.authentication.SettingsBackend',
 ]
 
+LOGIN_URL = "/submitsystem/"
+LOGIN_REDIRECT_URL = "/submitsystem/"
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
