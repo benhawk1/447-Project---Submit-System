@@ -24,6 +24,3 @@ loginInfo = pd.read_csv("C:/Users/benha/Documents/CMSC 447 Project/Users.csv")
 # name for the new assignment, and then a date and time for the assignment. If the values given for the date and time
 # are invalid, then the user will be reprompted accordingly.
 addAssignment(0, loginInfo)
-
-
-

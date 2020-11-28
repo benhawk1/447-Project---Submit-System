@@ -16,3 +16,4 @@ def encode(password, row, df):
     df.at[row, 'Key'] = key
     # Replace the string with the desired path to save the file
     df.to_csv("C:/Users/benha/Documents/CMSC 447 Project/Users.csv", mode='w', index=False)
+

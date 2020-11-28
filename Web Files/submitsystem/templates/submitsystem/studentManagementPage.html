@@ -57,7 +57,9 @@
                 {{ form.classNum }}
             <br><br>
 
-            {{ form.section }}
+            {% load crispy_forms_tags %}
+            {{ form.section|as_crispy_field  }}
+            <!--{{ form.section }}-->
             <!--<input type="radio" name="sectionNum">
             <label class="radio-inline">Section 1 &nbsp</label>
             <input type="radio" name="sectionNum">
@@ -79,7 +81,7 @@
                 {{ form.lastName }}
             <br>
 
-            <label>ID:<!--Email:--> &nbsp &nbsp &emsp;</label>
+            <label>ID:<!--Email:--> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</label>
                 <!-- for="MyUMBCEmail"<input type="text" name="MyUMBCEmail" id="MyUMBCEmail">-->
                 {{ form.id }}
             <br><br>
@@ -87,14 +89,16 @@
             <h6>Please Choose Student Roster CSV</h6>
                     <input type="file" id="myFile" name="filename">
                     <!--{{ form.roster }}-->
-            <input type="submit">
+                <input type="submit" onclick="return confirm('Complete this action?')" />
 
         </form>
+        <b>{{studentAction}}</b>
     </div>
-</body>
 
     <footer id="main-footer">
-        <p>Copyright &copy; Virtual Victory</p>
+        <p>Copyright &copy; 2020 Virtual Victory</p>
     </footer>
+</body>
+
 
 </html>

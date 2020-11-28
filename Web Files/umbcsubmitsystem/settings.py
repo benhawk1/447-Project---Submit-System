@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
 ]
 
 STATICFILES_DIRS = [str(BASE_DIR) + '/submitsystem/static/'] # added to allow django to find css and image files
@@ -82,6 +83,12 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = [
+    'submitsystem.authentication.SettingsBackend',
+]
+
+LOGIN_URL = "/submitsystem/"
+LOGIN_REDIRECT_URL = "/submitsystem/"
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

@@ -4,7 +4,6 @@ from bson.binary import Binary
 import datetime
 from submitsystem.db_func import *
 
-
 #####################
 ###Constants
 #####################
