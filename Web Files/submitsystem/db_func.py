@@ -13,6 +13,7 @@ def connect_db(client):
     return db
 
 def connect_collection(db, coll_name):
+    coll_name = str(coll_name)
     try:
         collection = db[coll_name]
         return collection
@@ -21,6 +22,7 @@ def connect_collection(db, coll_name):
         return -1
 
 def create_collection(coll_name):
+    coll_name = str(coll_name)
     client = connect_client()
     if client == -1:
         return -1
@@ -34,6 +36,7 @@ def create_collection(coll_name):
         return -1
 
 def list_collection(coll_name):
+    coll_name = str(coll_name)
     client = connect_client()
     if client == -1:
         return -1
@@ -48,6 +51,7 @@ def list_collection(coll_name):
         print(document)
 
 def drop_collection(coll_name):
+    coll_name = str(coll_name)
     client = connect_client()
     if client == -1:
         return -1

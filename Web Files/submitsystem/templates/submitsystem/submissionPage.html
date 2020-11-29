@@ -38,12 +38,16 @@
     </div>
 
     <div class="submission-box">
-        <h6>Please Choose Files to Upload</h6>
+        <h6>Please Choose Files to Upload</h6><br>
          <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form }}
+                Class: {{ form.studentClass }} &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+                Section: {{ form.section }} <br> <br>
+                Assignment: {{form.assignment}} <br> <br>
+                {{ form.submission }}
+
                 <!--<input type="file" id="myFile" name="filename" multiple>-->
-                <input type="submit" onclick="return confirm('Are you sure?')" />
+                <input type="submit" onclick="return confirm('Please verify the information is accurate before submission')" />
          </form>
         <b>{{fileSubmitted}}</b>
     </div>

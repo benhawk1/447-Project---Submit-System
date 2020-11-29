@@ -2,11 +2,15 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from .forms import LoginForm, SubmitForm, StudentForm, AssignmentForm
 from submitsystem.submission_backend import *
 from submitsystem.db_func import *
 from submitsystem.section_management import *
+from submitsystem.authentication import *
 from django.views.generic.base import TemplateView
+
+# user
 
 # write submitted file to uploads folder
 def handle_uploaded_file(f):
@@ -18,6 +22,9 @@ def handle_uploaded_file(f):
 
 # login page
 def index(request):
+    # message to display if login is invalid
+    invalidLogin = ''
+
     # if this is a POST request, process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request
@@ -28,22 +35,29 @@ def index(request):
             # process the input
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                # log user in
+                login(request, user)
 
-            # assume correct login for now and redirect to home page
-            return HttpResponseRedirect('home/')
+                # redirects to homepage if correct password
+                return HttpResponseRedirect('home/')
+            else:
+                invalidLogin = "Invalid login"
 
     # if a GET (or any other method) create a blank form
     else:
         form = LoginForm()
 
-    return render(request, 'submitsystem/loginPage.html', {'form': form})
+    return render(request, 'submitsystem/loginPage.html', {'form': form, 'invalidLogin' : invalidLogin})
 
 # contact page
+@login_required
 def contact(request):
     return render(request, 'submitsystem/contactPage.html')
 
 # submit page
-# @login_required (to be added next iteration)
+@login_required
 def submit(request):
     # displays message if file submitted
     fileSubmitted = ""
@@ -76,7 +90,7 @@ def submit(request):
     return render(request, 'submitsystem/submissionPage.html', {'form': form, 'fileSubmitted' : fileSubmitted})
 
 # student manager page
-# @login_required (to be added next iteration)
+@login_required
 def studentmanager(request):
 
     studentAction = ""
@@ -117,7 +131,7 @@ def studentmanager(request):
     return render(request, 'submitsystem/studentManagementPage.html', {'form': form, 'studentAction' : studentAction})
 
 # assignments page
-# @login_required (to be added next iteration)
+@login_required
 def assignments(request):
 
     assignmentAction = ""
@@ -161,7 +175,7 @@ def assignments(request):
     return render(request, 'submitsystem/AssignmentPage.html', {'form' : form, 'assignmentAction' : assignmentAction})
 
 # Home Page table:
-# @login_required (to be added next iteration)
+@method_decorator(login_required, name='dispatch')
 class homeTable(TemplateView):
     template_name = 'submitsystem/newHomePage.html'
 
