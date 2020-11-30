@@ -1,0 +1,70 @@
+<!-- Declare doctype and set title, link to css file and bootstrap-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MyUMBC Submission System</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'submitsystem/css/studentHomePage.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+
+<body>
+<!-- header for the page -->
+    <header id="main-header">
+        <div class="container2">
+            <h1>MyUMBC Submission System</h1>
+        </div>
+    </header>
+
+<!-- navbar for the page, hrefs potential to be changed across website -->
+    <nav id="navbar">
+        <div class="container">
+            <ul>
+                <li><a href="/submitsystem/home/">Home</a></li>
+                <li><a href="/submitsystem/contact/">Contact</a></li>
+                <li><a href="/submitsystem/submit/">Submit</a></li>
+                <!--<li><a href="/submitsystem/studentmanager/">Student Manager</a></li>-->
+                <li><a href="/submitsystem/assignments/">Assignments</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="showcase">
+        <div class="container">
+        </div>
+    </section>
+
+    <div class="container">
+        <section id="main">
+            <h2>Welcome to the Home Page</h2>
+
+        </section>
+
+    </div>
+<!-- table to be displayed on the page-->
+<table class="table">
+    <thead>
+        <tr>
+            {% for k in rosterhead %}
+            <th>{{k}}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in rosterbody %}
+            <tr>
+                <td>{{r.classname}}</td>
+                <td>{{r.section}}</td>
+                <!--<td>{{r.firstName}}</td>
+                <td>{{r.lastName}}</td>
+                <td>{{r.email}}</td>-->
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<!-- Footer for the page -->
+   <footer id="main-footer">
+        <p>Copyright &copy; 2020 Virtual Victory </p>
+    </footer>
+</body>
+</html>
