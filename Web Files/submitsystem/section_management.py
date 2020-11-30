@@ -1,6 +1,9 @@
 import os
 from bson.binary import Binary
+
+import datetime
 from submitsystem.db_func import *
+
 #####################
 ###Constants
 #####################
@@ -11,8 +14,9 @@ from submitsystem.db_func import *
 ##Example of section document in collection:
 ##{"section" : 5,
 ##"students" : [{"ID": "12345", "name" : "Queen Victoria",
-##"submissions" : [{"filename": "hw1.py", "file": "0110100001", "timestamp": "2008-05-03 15:23:16+00:00"}]}]
-##"assignments": [{"filename" : "monopoly.py", "file": "010001010", "due date": "2020-01-01 00:00:00+00:00"}]}
+##"submissions": [{"assignment_ID": "proj1", "filename": "hw1.py", "file": "0110100001", "timestamp": "2008-05-03 15:23:16+00:00"}]}],
+##"assignments": [{"assignment_ID": "proj1", "filename" : "monopoly.py", "file": "010001010", "due date": "2020-01-01 00:00:00+00:00",
+##}]}
 ##section dict contains student and assignments list of dicts; student dict contains submissions dicts
 ##coll_name represents which class the sections/students/etc are in
 ################
@@ -36,23 +40,36 @@ def add_section(sec_num, coll_name):
                            "assignments" : []})
     return 0
 
-def add_assignment(section, filepath, due_date, coll_name):
+def add_assignment(section, ID, filepath, due_date, coll_name):
     client = connect_client()
     if client == -1:
         return -1
-    
+
+    print("sm: due date before conversion is ", due_date)
+    print(type(due_date))
+
     db = connect_db(client)
 
     collection = connect_collection(db, coll_name)
 
+    #convert due_date string to datetime object
+    due_date = datetime.datetime.strptime(due_date, '%Y-%m-%d %H:%M')
+
     #iterate over documents in collection of sections    
     for doc in collection.find({}):
         if doc["section"] == section: #find correct section
+            for assignment_dict in doc["assignments"]:
+                if assignment_dict["ID"] == ID:
+                    print("Assignment already exists")
+                    return -1
             with open(filepath, 'rb') as f:
                 encoded = Binary(f.read())
             f.close()
+            #duedate_obj = datetime.datetime.strptime(due_date, '%Y-%m-%d %H:%M')
+            #print(duedate_obj)
             filename = os.path.basename(filepath)
             assign_dict = {"filename" : filename,
+                            "ID": ID,
                            "file" : encoded,
                            "due date": due_date}
 
@@ -73,7 +90,7 @@ def add_assignment(section, filepath, due_date, coll_name):
 
 
 
-def remove_assignment(section, name, coll_name):
+def remove_assignment(section, ID, coll_name):
     client = connect_client()
     if client == -1:
         return -1
@@ -87,7 +104,7 @@ def remove_assignment(section, name, coll_name):
         if doc["section"] == section: #find correct section
             for i in range(len(doc["assignments"])):
                 #look for matching assignment to remove
-                if doc["assignments"][i]["filename"] == name:
+                if doc["assignments"][i]["ID"] == ID:
 
                     new_doc = doc
                     new_doc["assignments"].remove(new_doc["assignments"][i])
@@ -97,8 +114,9 @@ def remove_assignment(section, name, coll_name):
                     #upsert parameter will insert if doc is not found in def
                     collection.update_one({"section": section}, {"$set" : new_doc}, upsert=False)
                     return 0
-                          
                 
+            print("Assignment not found")
+            return -1 
              
     #section not found
     print("Section not found")
