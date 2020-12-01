@@ -9,8 +9,18 @@ from submitsystem.db_func import *
 from submitsystem.section_management import *
 from submitsystem.authentication import *
 from django.views.generic.base import TemplateView
-
+import mimetypes
 # user
+
+#def download_file(request):
+#    f1_path = '/file/path'
+#    filename = 'downloaded_file_name.extension'
+
+#    f1 = open(f1_path,'r')
+#    mime_type, _ = mimetypes.guess_type(f1_path)
+#    response = HttpResponse(f1, content_type=mime_type)
+#    response['Content-Disposition'] = "attachment; filename=%s" % filename
+#        return response
 
 # write submitted file to uploads folder
 def handle_uploaded_file(f):
