@@ -10,7 +10,8 @@ from submitsystem.section_management import *
 from submitsystem.authentication import *
 from django.views.generic.base import TemplateView
 import mimetypes
-# user
+import pandas as pd
+
 
 #def download_file(request):
 #    f1_path = '/file/path'
@@ -50,8 +51,18 @@ def index(request):
                 # log user in
                 login(request, user)
 
-                # redirects to homepage if correct password
-                return HttpResponseRedirect('home/')
+                # determine if user is student or professor
+                df = pd.read_csv("submitsystem/Users.csv")
+                rowNumber = int(df[df['Username'] == username].index[0])
+                role = df.at[rowNumber, 'Role']
+
+                # redirect to homepage for student
+                if role == "S":
+                    return HttpResponseRedirect('studenthome/')
+
+                # redirect to professor homepage
+                else:
+                    return HttpResponseRedirect('home/')
             else:
                 invalidLogin = "Invalid login"
 
@@ -82,13 +93,24 @@ def submit(request):
             # process the file
             path = handle_uploaded_file(request.FILES['submission'])
 
-            # add sample course, section, and student (expected to say collection create failed if course already exits)
-            create_collection('CMSC 447')
-            add_section(5, 'CMSC 447')
-            add_student("EH999", "Eric Hamilton", 5, 'CMSC 447')
+            # get class, section and assignment the submission is for
+            studentClass = form.cleaned_data['studentClass']
+            section = form.cleaned_data['section']
+            assignment = form.cleaned_data['assignment']
+
+            # get user's ID and name (using sample ID for now)
+            username = request.user.username
+            df = pd.read_csv("submitsystem/Users.csv")
+            rowNumber = int(df[df['Username'] == username].index[0])
+            name = df.at[rowNumber, 'Name']
+
+            # add course, section, and student (expected to say collection create failed if course already exits)
+            create_collection(studentClass)
+            add_section(section, studentClass)
+            add_student("EH999", name, section, studentClass)
 
             # add to db
-            submit_file("EH999", 5, path, 'CMSC 447') # using sample student id and section for now
+            submit_file("EH999", assignment, section, path, studentClass)
 
             # add message to display to user
             fileSubmitted = "File submitted"
@@ -170,10 +192,10 @@ def assignments(request):
             add_section(section, classNum)
             # create assignment or remove assignment if create is not selected
             if createRemove == "Create":
-                add_assignment(section, path, datetimeDue, classNum)
+                add_assignment(section, assignmentName, path, datetimeDue, classNum)
                 assignmentAction = "Assignment Successfully Created"
             else:
-                remove_assignment(section, path, classNum)
+                remove_assignment(section, assignmentName, path, classNum)
                 assignmentAction = "Assignment Successfully Removed"
         else:
             print("Didn't work")
@@ -183,6 +205,70 @@ def assignments(request):
         form = AssignmentForm()
 
     return render(request, 'submitsystem/AssignmentPage.html', {'form' : form, 'assignmentAction' : assignmentAction})
+
+# student home page
+@login_required
+def studentHome(request):
+    print("here!")
+    return render(request, 'submitsystem/studentHomePage.html')
+
+# student contact page
+@login_required
+def studentContact(request):
+    return render(request, 'submitsystem/studentContactPage.html')
+
+# student submit page
+@login_required
+def studentSubmit(request):
+    # displays message if file submitted
+    fileSubmitted = ""
+
+    # if this is a POST request, process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = SubmitForm(request.POST, request.FILES)
+
+        # check whether it's valid:
+        if form.is_valid():
+            # process the file
+            path = handle_uploaded_file(request.FILES['submission'])
+
+            # get class, section and assignment the submission is for
+            studentClass = form.cleaned_data['studentClass']
+            section = form.cleaned_data['section']
+            assignment = form.cleaned_data['assignment']
+
+            # get user's ID and name (using sample ID for now)
+            username = request.user.username
+            df = pd.read_csv("submitsystem/Users.csv")
+            rowNumber = int(df[df['Username'] == username].index[0])
+            name = df.at[rowNumber, 'Name']
+
+
+            # add course, section, and student (expected to say collection create failed if course already exits)
+            create_collection(studentClass)
+            add_section(section, studentClass)
+            add_student("EH999", name, section, studentClass)
+
+            # add to db (sample assignments may not exist, expected "Assignment does not exist" message)
+            submit_file("EH999", assignment, section, path, studentClass)
+
+            # add message to display to user
+            fileSubmitted = "File submitted"
+
+    # if a GET (or any other method) create a blank form
+    else:
+        form = SubmitForm()
+
+    return render(request, 'submitsystem/studentSubmissionPage.html', {'form': form, 'fileSubmitted' : fileSubmitted})
+
+# student assignments page
+@login_required
+def studentAssignments(request):
+    assignment1 = ["4", "Homework 1", "hw1.py", "12/10/2020", "11:59"]
+    assignment2 = ["4", "Homework 2", "hw2.py", "12/30/2020", "11:59"]
+    assignments = [assignment1, assignment2]
+    return render(request, 'submitsystem/studentAssignmentPage.html', {'assignments' : assignments})
 
 # Home Page table:
 @method_decorator(login_required, name='dispatch')
@@ -196,4 +282,3 @@ class homeTable(TemplateView):
                                  {'classname':2, 'section':2, 'firstname':'Will', 'lastname':'Greene', 'email':'Greene@umbc.edu'}
                                  ]
         return context
-    

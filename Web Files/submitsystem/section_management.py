@@ -53,7 +53,8 @@ def add_assignment(section, ID, filepath, due_date, coll_name):
     collection = connect_collection(db, coll_name)
 
     #convert due_date string to datetime object
-    due_date = datetime.datetime.strptime(due_date, '%Y-%m-%d %H:%M')
+    if type(due_date) is str:
+        due_date = datetime.datetime.strptime(due_date, '%Y-%m-%d %H:%M')
 
     #iterate over documents in collection of sections    
     for doc in collection.find({}):

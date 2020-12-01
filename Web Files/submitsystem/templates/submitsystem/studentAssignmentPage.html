@@ -32,10 +32,10 @@
     <nav id="navbar">
 
             <ul>
-                <li><a href="/submitsystem/home/">Home</a></li>
-                <li><a href="/submitsystem/contact/">Contact</a></li>
-                <li><a href="/submitsystem/submit/">Submit</a></li>
-                <li><a href="/submitsystem/assignments/">Assignments</a></li>
+                <li><a href="/submitsystem/studenthome/">Home</a></li>
+                <li><a href="/submitsystem/studentcontact/">Contact</a></li>
+                <li><a href="/submitsystem/studentsubmit/">Submit</a></li>
+                <li><a href="/submitsystem/studentassignments/">Assignments</a></li>
             </ul>
         </div>
 
@@ -50,7 +50,7 @@
         </section>
     </div><br><br>
 
- <!--   <div class="submission-box">
+<div class="submission-box">
 
         <table class ="table">
             <thead>
@@ -66,19 +66,16 @@
             <tbody>
                 {% for r in assignments %}
                     <tr>
-                        <td>{{r.class}}</td>
-                        <td>{{r.section}}</td>
-                        <td>{{r.assignment}}</td>
-                        <td>{{r.attachment}}</td>
-                        <td>{{r.duedate}}</td>
-                        <td>{{r.duetime}}</td>
+                        {% for c in r %}
+                        <td><b>{{c}}</b></td>
+                        {% endfor %}
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
 
     </div>
--->
+
     <footer id="main-footer">
         <p>Copyright &copy; 2020 Virtual Victory</p>
     </footer>

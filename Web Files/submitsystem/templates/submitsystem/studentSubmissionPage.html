@@ -1,22 +1,17 @@
-<!-- Declare doctype and set title, link to css file and bootstrap-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>MyUMBC Submission System</title>
+    <title>Submit Page</title>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'submitsystem/css/studentHomePage.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'submitsystem/css/subStyle.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
-
 <body>
-<!-- header for the page -->
     <header id="main-header">
         <div class="container2">
             <h1>MyUMBC Submission System</h1>
         </div>
     </header>
-
-<!-- navbar for the page, hrefs potential to be changed across website -->
     <nav id="navbar">
         <div class="container">
             <ul>
@@ -35,15 +30,31 @@
 
     <div class="container">
         <section id="main">
-            <h2>Welcome to the Student Home Page</h2>
+            <h2>Welcome to the Submission Page</h2>
 
         </section>
 
     </div>
 
-<!-- Footer for the page -->
-   <footer id="main-footer">
-        <p>Copyright &copy; 2020 Virtual Victory </p>
+    <div class="submission-box">
+        <h6>Please Choose Files to Upload</h6><br>
+         <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                Class: {{ form.studentClass }} &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+                Section: {{ form.section }} <br> <br>
+                Assignment: {{form.assignment}} <br> <br>
+                {{ form.submission }}
+
+                <!--<input type="file" id="myFile" name="filename" multiple>-->
+                <input type="submit" onclick="return confirm('Please verify the information is accurate before submission')" />
+         </form>
+        <b>{{fileSubmitted}}</b>
+    </div>
+
+
+    <footer id="main-footer">
+        <p>Copyright &copy; 2020 Virtual Victory</p>
     </footer>
 </body>
+
 </html>
