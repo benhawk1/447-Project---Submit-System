@@ -1,3 +1,4 @@
+
 import pandas as pd
 import login
 # This file includes basic tests for the hashing and loginValidation functions within login.py.
@@ -16,7 +17,5 @@ print(login.loginValidation("Will1", "My Password", loginInfo))  # Prints True (
 # Checks to see if a given password is at a specified row in the database
 print(login.hashing("My Password", 0, loginInfo))  # Prints False
 print(login.hashing("My Password", 1, loginInfo))  # Prints True
-
-
 
 

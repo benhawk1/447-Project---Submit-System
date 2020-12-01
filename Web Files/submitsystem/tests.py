@@ -23,6 +23,33 @@ class Iteration3Tests(TestCase):
         response = client.post(reverse("index"), username="John1", password="Eggs")
         self.assertEqual(response.status_code, 200)
 
+# test student: home, contact, submit, and assignments page
+class Iteration4Tests(TestCase):
+
+    #  visit student home page
+    def test_home(self):
+        response = client.get(reverse("studenthome"))
+        self.assertEqual(response.status_code, 302)
+
+    # visit student contact page
+    def test_contact(self):
+        response = client.get(reverse("studentcontact"))
+        self.assertEqual(response.status_code, 302)
+
+    # visit student submit page
+    def test_submit_get(self):
+        response = client.get(reverse("studentsubmit"))
+        self.assertEqual(response.status_code, 302)
+
+    # submit file on student submit page
+    def test_submit_post(self):
+        response = client.post(reverse("studentsubmit"), studentClass=447, section=1, assignment="HW1", submission=open("submitsystem/uploads/test.txt", "r"))
+        self.assertEqual(response.status_code, 302)
+
+    # visit student assignments page
+    def test_assignments(self):
+        response = client.get(reverse("studentassignments"))
+        self.assertEqual(response.status_code, 302)
 
 # test submitsystem urls, views, and forms
 class Iteration1Tests(TestCase):

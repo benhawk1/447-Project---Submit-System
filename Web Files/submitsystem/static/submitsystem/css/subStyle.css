@@ -33,11 +33,11 @@ body{
     color: black;
 }
 
-#navbar ul{
+/*#navbar ul{
     padding: 5px;
     list-style: none;
 }
-
+*/
 #navbar li{
     display: inline;
 }
