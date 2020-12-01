@@ -10,5 +10,9 @@ urlpatterns = [
     path('submit/', views.submit, name='submit'),
     path('studentmanager/', views.studentmanager, name='studentmanager'),
     path('assignments/', views.assignments, name="assignments"),
+    path('studenthome/', views.studentHome, name='studenthome'),
+    path('studentcontact/', views.studentContact, name='studentcontact'),
+    path('studentsubmit/', views.studentSubmit, name='studentsubmit'),
+    path('studentassignments/', views.studentAssignments, name="studentassignments"),
     url('home/', views.homeTable.as_view(), name='home'),
 ]
