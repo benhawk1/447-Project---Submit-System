@@ -121,13 +121,7 @@ def get_timestamp():
     
     tz = pytz.timezone(TIMEZONE)
     local_time = now.astimezone(tz)
-
-    print(local_time)
-    
-    #dt_string = local_time.strftime("%m/%d/%Y %H:%M:%S")
-
-    
-    #return dt_string
+   
     return local_time
 
 
