@@ -45,9 +45,6 @@ def add_assignment(section, ID, filepath, due_date, coll_name):
     if client == -1:
         return -1
 
-    print("sm: due date before conversion is ", due_date)
-    print(type(due_date))
-
     db = connect_db(client)
 
     collection = connect_collection(db, coll_name)
@@ -66,8 +63,6 @@ def add_assignment(section, ID, filepath, due_date, coll_name):
             with open(filepath, 'rb') as f:
                 encoded = Binary(f.read())
             f.close()
-            #duedate_obj = datetime.datetime.strptime(due_date, '%Y-%m-%d %H:%M')
-            #print(duedate_obj)
             filename = os.path.basename(filepath)
             assign_dict = {"filename" : filename,
                             "ID": ID,

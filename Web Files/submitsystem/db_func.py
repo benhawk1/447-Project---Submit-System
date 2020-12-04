@@ -35,6 +35,7 @@ def create_collection(coll_name):
         print("Collection create failed: already exists")
         return -1
 
+#currently only works with course collections (with sections, assignments, etc)
 def list_collection(coll_name):
     coll_name = str(coll_name)
     client = connect_client()
@@ -45,10 +46,23 @@ def list_collection(coll_name):
 
     collection = connect_collection(db, coll_name)
 
+    print("Listing information from ", coll_name , " ...")
     #print all documents in collection
     cursor = collection.find({})
     for document in cursor:
-        print(document)
+        print("section number: " , document["section"])
+        print()
+        for student in document["students"]:
+            print("student ID and name: " , student["ID"], " / ", student["name"])
+            print("submissions: ")
+            for submission in student["submissions"]:
+                print(submission)
+        print()
+        print("assignments: ")
+        for assignment in document["assignments"]:
+            print(assignment)
+        print()
+        #print(document)
 
 def drop_collection(coll_name):
     coll_name = str(coll_name)

@@ -6,8 +6,8 @@ from section_management import *
 COURSE_NAME = "CMSC 447"
 SECTION_NUM = 5
 STUDENT_NAME = "Eric Hamilton"
-NEW_NAME = "Heric Amilton"
 STUDENT_ID = "EH999"
+NEW_NAME = "Heric Amilton"
 ASSIGNMENT_ID = "hw1"
 ASSIGNMENT_FILEPATH = "test files\hw1.txt"
 ASSIGNMENT_FILENAME = "hw1.txt"
