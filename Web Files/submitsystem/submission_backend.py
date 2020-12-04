@@ -76,7 +76,23 @@ def submit_file(student_ID, assignment_ID, section, filepath, coll_name):
             return -1
     print("section not found")
     return -1
-   
+
+def get_assignments(section, coll_name):
+    #connect to database, access collection
+    client = connect_client()
+    if client == -1:
+        return -1
+    
+    db = connect_db(client)
+
+    collection = connect_collection(db, coll_name)
+    
+    for doc in collection.find({}):
+        if doc["section"] == section: #found the right section
+            return doc["assignments"]
+            
+    print("section not found")
+    return -1
             
 def get_latest_submission(student_ID, section, coll_name):
     #connect to database, access collection
@@ -121,13 +137,7 @@ def get_timestamp():
     
     tz = pytz.timezone(TIMEZONE)
     local_time = now.astimezone(tz)
-
-    print(local_time)
-    
-    #dt_string = local_time.strftime("%m/%d/%Y %H:%M:%S")
-
-    
-    #return dt_string
+   
     return local_time
 
 
