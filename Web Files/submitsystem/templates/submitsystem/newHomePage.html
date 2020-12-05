@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>MyUMBC Submission System</title>
+    <title>Submission System Home Page</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'submitsystem/css/newHomePage.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -25,10 +25,13 @@
                 <li><a href="/submitsystem/submit/">Submit</a></li>
                 <li><a href="/submitsystem/studentmanager/">Student Manager</a></li>
                 <li><a href="/submitsystem/assignments/">Assignments</a></li>
+                <li><a href="/submitsystem/submissionviewer/">Student Submissions</a></li>
+
+
             </ul>
         </div>
+
     </nav>
-    <br><br>
 
     <section id="showcase">
         <div class="container">
@@ -143,8 +146,8 @@
             <tr>
                 <td>{{r.classname}}</td>
                 <td>{{r.section}}</td>
-                <td>{{r.firstName}}</td>
-                <td>{{r.lastName}}</td>
+                <td>{{r.firstname}}</td>
+                <td>{{r.lastname}}</td>
                 <td>{{r.email}}</td>
             </tr>
         {% endfor %}
