@@ -25,10 +25,13 @@
                 <li><a href="/submitsystem/submit/">Submit</a></li>
                 <li><a href="/submitsystem/studentmanager/">Student Manager</a></li>
                 <li><a href="/submitsystem/assignments/">Assignments</a></li>
+                <li><a href="/submitsystem/submissionviewer/">Student Submissions</a></li>
+
+
             </ul>
         </div>
+
     </nav>
-    <br><br>
 
     <section id="showcase">
         <div class="container">
@@ -143,8 +146,8 @@
             <tr>
                 <td>{{r.classname}}</td>
                 <td>{{r.section}}</td>
-                <td>{{r.firstName}}</td>
-                <td>{{r.lastName}}</td>
+                <td>{{r.firstname}}</td>
+                <td>{{r.lastname}}</td>
                 <td>{{r.email}}</td>
             </tr>
         {% endfor %}

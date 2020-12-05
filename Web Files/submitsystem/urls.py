@@ -14,5 +14,6 @@ urlpatterns = [
     path('studentcontact/', views.studentContact, name='studentcontact'),
     path('studentsubmit/', views.studentSubmit, name='studentsubmit'),
     path('studentassignments/', views.studentAssignments, name="studentassignments"),
+    path('submissionviewer/', views.submissionViewer, name='submissionViewer'),
     url('home/', views.homeTable.as_view(), name='home'),
 ]
