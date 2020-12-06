@@ -26,7 +26,7 @@ class SubmitForm(forms.Form):
 # get student data to add or remove from student management page
 class StudentForm(forms.Form):
     addRemove = forms.ChoiceField(choices=[("Add", "Add"), ("Remove", "Remove")])
-    classNum = forms.IntegerField()
+    classNum = forms.CharField()
     sectionChoices = []
     for i in range(1, 5):
         sectionChoices.append((i, f'Section {i}'))
@@ -42,7 +42,7 @@ class StudentForm(forms.Form):
 
 class AssignmentForm(forms.Form):
     createRemove = forms.ChoiceField(choices=[("Create", "Create"), ("Remove", "Remove")])
-    classNum = forms.IntegerField()
+    classNum = forms.CharField()
     sectionChoices = []
     for i in range(1, 5):
         sectionChoices.append((i, f'Section {i}'))

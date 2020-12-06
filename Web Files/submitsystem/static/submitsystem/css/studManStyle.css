@@ -54,17 +54,19 @@ h2{
     background: black;
     text-align: center ;
     color: white;
+    top: 200px;
+    bottom: 100px;
+    width: 500px;
     border-radius: 1em;
     padding: 1em;
-    position: fixed;
-    top: 475px;
+    position: relative;
     left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%)
+    transform: translate(-50%, -50%);
 }
 
 #main-footer{
-    position: fixed;
+    position: relative;
+    top: 100px;
     left: 0;
     bottom: 0;
     width: 100%;

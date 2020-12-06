@@ -4,7 +4,6 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-#    path('<str:filepath>/', views.download_file),
     path('', views.index, name='index'),
     path('contact/', views.contact, name='contact'),
     path('submit/', views.submit, name='submit'),
