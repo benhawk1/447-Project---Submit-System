@@ -159,7 +159,8 @@ td {
 }
 /* gray footer fixed to the bottom of the page */                
 #main-footer{
-    position: fixed;
+    position: relative;
+    top: 200px;
     left: 0;
     bottom: 0;
     width: 100%;

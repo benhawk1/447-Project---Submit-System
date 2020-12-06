@@ -265,8 +265,8 @@ def studentSubmit(request):
 # student assignments page
 @login_required
 def studentAssignments(request):
-    assignment1 = ["447", "Homework 1", "hw1.py", "12/10/2020", "11:59"]
-    assignment2 = ["447", "Homework 2", "hw2.py", "12/30/2020", "11:59"]
+    assignment1 = ["447", "1", "Homework1", "hw1.py", "12/10/2020", "11:59"]
+    assignment2 = ["447", "2", "Project2", "hw2.py", "12/30/2020", "11:59"]
     assignments = [assignment1, assignment2]
     return render(request, 'submitsystem/studentAssignmentPage.html', {'assignments' : assignments})
 
@@ -285,7 +285,7 @@ class homeTable(TemplateView):
 
 @login_required
 def submissionViewer(request):
-    assignment1 = ["447", "Homework 1", "hw1.py", "12/10/2020", "11:50"]
-    assignment2 = ["447", "Homework 2", "hw2.py", "12/31/2020", "4:32"]
+    assignment1 = ["447", "1", "Homework1", "hw1.py", "12/10/2020", "11:50"]
+    assignment2 = ["447", "2", "Project2", "hw2.py", "12/31/2020", "4:32"]
     assignments = [assignment1, assignment2]
     return render(request, 'submitsystem/submissionViewer.html', {'assignments' : assignments})
