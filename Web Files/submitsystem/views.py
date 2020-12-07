@@ -328,8 +328,8 @@ def submissionViewer(request):
     context = {'data': output}
     return render(request, 'submitSystem/submissionViewer.html', context)
     """
-    assignment1 = ["John", "Greene", "CMSC 447", "Homework1", "hw1.py", "12/10/2020", "11:50", "12/10/2020", "11:59"]
-    assignment2 = ["Mason", "Black", "CMSC 341", "Project2", "proj2.cpp", "12/15/2020", "4:32", "12/14/2020", "11:59"]
+    assignment1 = ["John", "Greene", "CMSC 447", "Homework 1", "hw1.py", "12/10/2020", "11:50", "12/10/2020", "11:59"]
+    assignment2 = ["Mason", "Black", "CMSC 341", "Project 2", "proj2.cpp", "12/15/2020", "4:32", "12/14/2020", "11:59"]
     assignments = [assignment1, assignment2]
     return render(request, 'submitsystem/submissionViewer.html', {'assignments' : assignments})
 
