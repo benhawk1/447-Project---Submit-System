@@ -3,6 +3,7 @@ from bson.binary import Binary
 
 import datetime
 from submitsystem.db_func import *
+from submitsystem.assignmentRecording import *
 
 #####################
 ###Constants
@@ -49,6 +50,9 @@ def add_assignment(section, ID, filepath, due_date, coll_name):
 
     collection = connect_collection(db, coll_name)
 
+    due_date_split = due_date.strftime('%Y-%m-%d %H:%M')
+    due_date_split = due_date_split.split(' ')
+    recordAssignment(coll_name, section, ID, due_date_split[0], due_date_split[1])
     #convert due_date string to datetime object
     if type(due_date) is str:
         due_date = datetime.datetime.strptime(due_date, '%Y-%m-%d %H:%M')
