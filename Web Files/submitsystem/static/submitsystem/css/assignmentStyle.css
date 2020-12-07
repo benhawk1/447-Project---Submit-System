@@ -15,6 +15,7 @@ body{
     color: black;
 }
 
+
 .container2{
     width:80%;
     margin:auto;
@@ -56,12 +57,17 @@ h2{
     color: white;
     top: 200px;
     bottom: 100px;
-    width: 650px;
+    width: 900px;
     border-radius: 1em;
     padding: 1em;
     position: relative;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+td, th{
+    color: #ffffff;
+    text-align: center;
 }
 
 #main-footer{
