@@ -186,6 +186,15 @@ def assignments(request):
             datetimeDue = form.cleaned_data['datetimeDue']
 
             print(createRemove, classNum, section, assignmentName, datetimeDue)
+            """
+            if createRemove == "Create":
+                actual_file_name = path.split('/')[2]
+                myclient = pymongo.MongoClient("mongodb://localhost:27017")
+                mydb = myclient["student_submissions"]
+                mycol = mydb["assignments"]
+                mydict = {"name": assignmentName, "class": classNum, "section": section, "due": datetimeDue}
+                x = mycol.insert_one(mydict)
+            """
 
             # add course and section(s) # (expected to say collection create failed if course already exits)
             create_collection(classNum)
@@ -265,6 +274,17 @@ def studentSubmit(request):
 # student assignments page
 @login_required
 def studentAssignments(request):
+    """
+        myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+        mydb = myclient["student_submissions"]
+        mycol = mydb["assignments"]
+        output = []
+        for x in mycol.find({}, {"_id": 0, "due": 0}):
+            output.append(x)
+
+        context = {'data': output}
+        return render(request, 'submitSystem/studentAssignmentPage.html', context)
+        """
     assignment1 = ["CMSC 447", "1", "Homework 1", "hw1.pdf", "12/10/2020", "11:59"]
     assignment2 = ["CMPE 315", "3", "Lab 4", "lab4.pdf", "12/30/2020", "11:59"]
     assignments = [assignment1, assignment2]
@@ -297,7 +317,78 @@ class studentHomeTable(TemplateView):
 
 @login_required
 def submissionViewer(request):
-    assignment1 = ["John", "Greene", "447", "Homework1", "hw1.py", "12/10/2020", "11:50", "12/10/2020", "11:59"]
-    assignment2 = ["Mason", "Black", "341", "Project2", "proj2.cpp", "12/15/2020", "4:32", "12/14/2020", "11:59"]
+    """
+    myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+    mydb = myclient["student_submissions"]
+    mycol = mydb["assignments"]
+    output = []
+    for x in mycol.find({}, {"_id": 0, "due": 0}):
+        output.append(x)
+
+    context = {'data': output}
+    return render(request, 'submitSystem/submissionViewer.html', context)
+    """
+    assignment1 = ["John", "Greene", "CMSC 447", "Homework1", "hw1.py", "12/10/2020", "11:50", "12/10/2020", "11:59"]
+    assignment2 = ["Mason", "Black", "CMSC 341", "Project2", "proj2.cpp", "12/15/2020", "4:32", "12/14/2020", "11:59"]
     assignments = [assignment1, assignment2]
     return render(request, 'submitsystem/submissionViewer.html', {'assignments' : assignments})
+
+"""
+def getfileViewer(request):
+    val = request.POST['list']
+    val = val.replace("'",'"')
+    y = json.loads(val)
+
+    fname = y['first_name']
+    lname = y['last_name']
+    clss = y['class']
+    assi = y['assignment']
+    path = y['path']
+    sd = y['sub_date']
+    st = y['sub_time']
+    dd = y['due_date']
+    dt = y['due_time']
+
+    myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+    mydb = myclient["student_submissions"]
+    mycol = mydb["assignments"]
+    x = mycol.find_one({"first_name": fname, "last_name": lname, "class": clss, "assignment": assi, "path": path, "sub_date": sd, "sub_time":st, "due_date": dd, "due_time":dt})
+
+    split = x['path'].split('/')
+    file_name = ""
+    for cur in split:
+        file_name = cur
+
+    response = HttpResponse(FileWrapper(open(x['path'])), content_type='application/force-download')
+    response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(file_name)
+    response['X-Sendfile'] = smart_str(x['path'])
+    return response
+"""
+"""
+def getfileAssignments(request):
+    val = request.POST['list']
+    val = val.replace("'","'")
+    y = json.loads(val)
+
+    clss = y['class']
+    sec  = y['section']
+    assi = y['assignment']
+    path = y['path']
+    dd = y['due_date']
+    dt = y['due_time']
+
+    myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+    mydb = myclient["student_submissions"]
+    mycol = mydb["assignments"]
+    x = mycol.find_one({"class": clss, "section": sec, "assignment": assi, "path": path, "due_date": dd, "due_time": dt})
+    
+    split = x['path'].split('/')
+    file_name = ""
+    for cur in split:
+        file_name = cur
+
+    response = HttpResponse(FileWrapper(open(x['path'])), content_type='application/force-download')
+    response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(file_name)
+    response['X-Sendfile'] = smart_str(x['path'])
+    return response
+"""

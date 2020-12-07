@@ -71,6 +71,24 @@
                         {% endfor %}
                     </tr>
                 {% endfor %}
+                <!--
+                 {% for i in data %}
+                    <tr>
+                        <td>{{i.class}}}</td>
+                        <td>{{i.section}}</td>
+                        <td>{{i.assignment}}</td>
+                        <td>
+                            <form action="/submitsystem/getfile/" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="list" value="{{ i }}" />
+                            <input type="submit" />
+                            </form>
+                        </td>
+                        <td>{{i.due_date}}</td>                                                <td>{{i.class}}}</td>
+                        <td>{{i.due_time}}</td>
+                    </tr>
+                 {% endfor %}
+                 -->
             </tbody>
         </table>
 
