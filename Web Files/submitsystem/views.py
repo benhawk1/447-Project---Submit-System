@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from .forms import LoginForm, SubmitForm, StudentForm, AssignmentForm
+from .forms import LoginForm, SubmitForm, StudentForm, AssignmentForm, StudentSubmitForm
 from submitsystem.submission_backend import *
 from submitsystem.db_func import *
 from submitsystem.section_management import *
@@ -226,7 +226,7 @@ def studentSubmit(request):
     # if this is a POST request, process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = SubmitForm(request.POST, request.FILES)
+        form = StudentSubmitForm(request.POST, request.FILES)
 
         # check whether it's valid:
         if form.is_valid():
@@ -258,15 +258,15 @@ def studentSubmit(request):
 
     # if a GET (or any other method) create a blank form
     else:
-        form = SubmitForm()
+        form = StudentSubmitForm()
 
     return render(request, 'submitsystem/studentSubmissionPage.html', {'form': form, 'fileSubmitted' : fileSubmitted})
 
 # student assignments page
 @login_required
 def studentAssignments(request):
-    assignment1 = ["447", "1", "Homework1", "hw1.py", "12/10/2020", "11:59"]
-    assignment2 = ["447", "2", "Project2", "hw2.py", "12/30/2020", "11:59"]
+    assignment1 = ["CMSC 447", "1", "Homework 1", "hw1.pdf", "12/10/2020", "11:59"]
+    assignment2 = ["CMPE 315", "3", "Lab 4", "lab4.pdf", "12/30/2020", "11:59"]
     assignments = [assignment1, assignment2]
     return render(request, 'submitsystem/studentAssignmentPage.html', {'assignments' : assignments})
 
@@ -277,15 +277,27 @@ class homeTable(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(homeTable, self).get_context_data(**kwargs)
-        context["rosterhead"] = ['Class Number', 'Section', 'First Name', 'Last Name', 'E-Mail']
-        context["rosterbody"] = [{'classname':1, 'section':1, 'firstname':'John', 'lastname':'Lewis', 'email':'john1@umbc.edu'},
-                                 {'classname':2, 'section':2, 'firstname':'Will', 'lastname':'Greene', 'email':'Greene@umbc.edu'}
+        context["rosterhead"] = ['Class', 'Class Section']
+        context["rosterbody"] = [{'classname':"CMSC 447", 'section':1},
+                                 {'classname':"CMSC 341", 'section':2}
+                                 ]
+        return context
+
+@method_decorator(login_required, name='dispatch')
+class studentHomeTable(TemplateView):
+    template_name = 'submitsystem/studentHomePage.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(studentHomeTable, self).get_context_data(**kwargs)
+        context["rosterhead"] = ['Class', 'Class Section', 'Teacher First Name', 'Teacher Last Name', 'E-Mail']
+        context["rosterbody"] = [{'classname':"CMSC 447", 'section':1, 'firstname':'Will', 'lastname':'Greene', 'email':'Greene@umbc.edu'},
+                                 {'classname':"CMPE 315", 'section':3, 'firstname':'Barry', 'lastname':'Smith', 'email':'Barry0@umbc.edu'}
                                  ]
         return context
 
 @login_required
 def submissionViewer(request):
-    assignment1 = ["447", "1", "Homework1", "hw1.py", "12/10/2020", "11:50"]
-    assignment2 = ["447", "2", "Project2", "hw2.py", "12/31/2020", "4:32"]
+    assignment1 = ["John", "Greene", "447", "Homework1", "hw1.py", "12/10/2020", "11:50", "12/10/2020", "11:59"]
+    assignment2 = ["Mason", "Black", "341", "Project2", "proj2.cpp", "12/15/2020", "4:32", "12/14/2020", "11:59"]
     assignments = [assignment1, assignment2]
     return render(request, 'submitsystem/submissionViewer.html', {'assignments' : assignments})
