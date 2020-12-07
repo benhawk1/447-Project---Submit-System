@@ -20,17 +20,19 @@
     password, and button to click to log in -->
     <h2>Login Page</h2><br>
     <div class="login">
+        <br><br>
     <form id="login" method="post">
-        <label><b>Username
+        <label><b>Username:
         </b>
-        </label>
+        </label><br>
         {% csrf_token %}
         <!--<input type="text" name="Uname" id="Uname" placeholder="Username">-->
         {{ form.username }}
         <br><br>
-        <label><b>Password
+        <label><b>Password:
         </b>
-        </label>
+            <br>
+        </label><br>
         <!--<input type="Password" name="Pass" id="Pass" placeholder="Password">-->
         {{ form.password }}
         <br><br>
