@@ -141,7 +141,6 @@ def studentmanager(request):
             lastName = form.cleaned_data['lastName']
             #email = form.cleaned_data['email'] email replaced with id to match backend
             id = form.cleaned_data['id']
-            print(addRemove, classNum, section, firstName, lastName, id)
 
             # create class and section (expected to say collection create failed if class already exits)
             create_collection(classNum)
@@ -185,7 +184,6 @@ def assignments(request):
             assignmentName = form.cleaned_data['assignmentName']
             datetimeDue = form.cleaned_data['datetimeDue']
 
-            print(createRemove, classNum, section, assignmentName, datetimeDue)
             """
             if createRemove == "Create":
                 actual_file_name = path.split('/')[2]
@@ -206,8 +204,6 @@ def assignments(request):
             else:
                 remove_assignment(section, assignmentName, path, classNum)
                 assignmentAction = "Assignment Successfully Removed"
-        else:
-            print("Didn't work")
 
     # if a GET (or any other method) create a blank form
     else:
@@ -218,7 +214,6 @@ def assignments(request):
 # student home page
 @login_required
 def studentHome(request):
-    print("here!")
     return render(request, 'submitsystem/studentHomePage.html')
 
 # student contact page
