@@ -141,7 +141,6 @@ def studentmanager(request):
             lastName = form.cleaned_data['lastName']
             #email = form.cleaned_data['email'] email replaced with id to match backend
             id = form.cleaned_data['id']
-            print(addRemove, classNum, section, firstName, lastName, id)
 
             # create class and section (expected to say collection create failed if class already exits)
             create_collection(classNum)
@@ -185,7 +184,6 @@ def assignments(request):
             assignmentName = form.cleaned_data['assignmentName']
             datetimeDue = form.cleaned_data['datetimeDue']
 
-            print(createRemove, classNum, section, assignmentName, datetimeDue)
             """
             if createRemove == "Create":
                 actual_file_name = path.split('/')[2]
@@ -206,8 +204,6 @@ def assignments(request):
             else:
                 remove_assignment(section, assignmentName, path, classNum)
                 assignmentAction = "Assignment Successfully Removed"
-        else:
-            print("Didn't work")
 
     # if a GET (or any other method) create a blank form
     else:
@@ -218,7 +214,6 @@ def assignments(request):
 # student home page
 @login_required
 def studentHome(request):
-    print("here!")
     return render(request, 'submitsystem/studentHomePage.html')
 
 # student contact page
@@ -309,7 +304,7 @@ class studentHomeTable(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(studentHomeTable, self).get_context_data(**kwargs)
-        context["rosterhead"] = ['Class', 'Class Section', 'Teacher First Name', 'Teacher Last Name', 'E-Mail']
+        context["rosterhead"] = ['Class', 'Class Section', 'Professor First Name', 'Professor Last Name', 'E-Mail']
         context["rosterbody"] = [{'classname':"CMSC 447", 'section':1, 'firstname':'Will', 'lastname':'Greene', 'email':'Greene@umbc.edu'},
                                  {'classname':"CMPE 315", 'section':3, 'firstname':'Barry', 'lastname':'Smith', 'email':'Barry0@umbc.edu'}
                                  ]
@@ -328,8 +323,8 @@ def submissionViewer(request):
     context = {'data': output}
     return render(request, 'submitSystem/submissionViewer.html', context)
     """
-    assignment1 = ["John", "Greene", "CMSC 447", "Homework1", "hw1.py", "12/10/2020", "11:50", "12/10/2020", "11:59"]
-    assignment2 = ["Mason", "Black", "CMSC 341", "Project2", "proj2.cpp", "12/15/2020", "4:32", "12/14/2020", "11:59"]
+    assignment1 = ["John", "Greene", "CMSC 447", "Homework 1", "hw1.py", "12/10/2020", "11:50", "12/10/2020", "11:59"]
+    assignment2 = ["Mason", "Black", "CMSC 341", "Project 2", "proj2.cpp", "12/15/2020", "4:32", "12/14/2020", "11:59"]
     assignments = [assignment1, assignment2]
     return render(request, 'submitsystem/submissionViewer.html', {'assignments' : assignments})
 
