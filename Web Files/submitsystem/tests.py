@@ -23,6 +23,13 @@ class Iteration3Tests(TestCase):
         response = client.post(reverse("index"), username="John1", password="Eggs")
         self.assertEqual(response.status_code, 200)
 
+# test submission viewer page
+class Iteration5Tests(TestCase):
+    # visit submission viewer page
+    def test_submissionviewer(self):
+        response = client.get(reverse("submissionViewer"))
+        self.assertEqual(response.status_code, 302)
+
 # test student: home, contact, submit, and assignments page
 class Iteration4Tests(TestCase):
 
