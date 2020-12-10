@@ -12,12 +12,22 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
 
 # get file submission from home page
+class StudentSubmitForm(forms.Form):
+    sectionChoices = []
+    classChoices=[('cmsc447', 'CMSC 447'), ('cmpe315', 'CMPE 315')]
+    assignmentNames=[('homework1', 'Homework 1'), ('lab4', 'Lab 4')]
+    sectionChoices=[('section1', 'Section 1'), ('section3', 'Section 3')]
+    studentClass = forms.CharField(label='Class:',widget=forms.Select(choices=classChoices))
+    section = forms.CharField(label='Section:',widget=forms.Select(choices=sectionChoices))
+    submission = forms.FileField(label='')
+    assignment = forms.CharField(label='Assignment', widget=forms.Select(choices=assignmentNames))
+
+# get file submission from home page
 class SubmitForm(forms.Form):
     sectionChoices = []
-    classChoices=[('cmsc101', 'CMSC 101'), ('cmsc447', 'CMSC 447'), ('biol141', 'BIOL141')]
-    assignmentNames=[('helloAssignment', 'Hello World'),('bestClass', 'Best Class Assignment'),('bioAssign', 'Bio Assignment')]
-    for i in range(1, 5):
-        sectionChoices.append((i, f'Section {i}'))
+    classChoices=[('cmsc447', 'CMSC 447'), ('cmsc341', 'CMSC 341')]
+    assignmentNames=[('homework1', 'Homework 1'), ('project2', 'Project 2')]
+    sectionChoices=[('section1', 'Section 1'), ('section2', 'Section 2')]
     studentClass = forms.CharField(label='Class:',widget=forms.Select(choices=classChoices))
     section = forms.CharField(label='Section:',widget=forms.Select(choices=sectionChoices))
     submission = forms.FileField(label='')
@@ -26,7 +36,7 @@ class SubmitForm(forms.Form):
 # get student data to add or remove from student management page
 class StudentForm(forms.Form):
     addRemove = forms.ChoiceField(choices=[("Add", "Add"), ("Remove", "Remove")])
-    classNum = forms.IntegerField()
+    classNum = forms.CharField()
     sectionChoices = []
     for i in range(1, 5):
         sectionChoices.append((i, f'Section {i}'))
@@ -42,7 +52,7 @@ class StudentForm(forms.Form):
 
 class AssignmentForm(forms.Form):
     createRemove = forms.ChoiceField(choices=[("Create", "Create"), ("Remove", "Remove")])
-    classNum = forms.IntegerField()
+    classNum = forms.CharField()
     sectionChoices = []
     for i in range(1, 5):
         sectionChoices.append((i, f'Section {i}'))

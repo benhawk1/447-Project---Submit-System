@@ -8,6 +8,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'submitsystem/css/studManStyle.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     </head>
+
+
 <body>
 <!-- header for the page -->
     <header id="main-header">
@@ -25,6 +27,8 @@
                 <li><a href="/submitsystem/submit/">Submit</a></li>
                 <li><a href="/submitsystem/studentmanager/">Student Manager</a></li>
                 <li><a href="/submitsystem/assignments/">Assignments</a></li>
+                <li><a href="/submitsystem/submissionviewer/">Student Submissions</a></li>
+
             </ul>
         </div>
     </nav>
@@ -86,7 +90,7 @@
                 {{ form.id }}
             <br><br>
 
-            <h6>Please Choose Student Roster CSV</h6>
+            <h6>Please Choose Student Roster CSV If Necessary</h6>
                     <input type="file" id="myFile" name="filename">
                     <!--{{ form.roster }}-->
                 <input type="submit" onclick="return confirm('Complete this action?')" />
@@ -98,7 +102,7 @@
     <footer id="main-footer">
         <p>Copyright &copy; 2020 Virtual Victory</p>
     </footer>
-</body>
 
+</body>
 
 </html>

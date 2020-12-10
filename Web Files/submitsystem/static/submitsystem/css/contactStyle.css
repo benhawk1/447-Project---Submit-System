@@ -73,7 +73,8 @@ table.center {
 }
 
 #main-footer{
-    position: fixed;
+    position: relative;
+    top: 350px;
     left: 0;
     bottom: 0;
     width: 100%;

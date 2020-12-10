@@ -109,13 +109,14 @@ table.scrolldown {
 }
                 
 thead tr th {
-    height: 40px;
-    line-height: 40px;
+    height: 30px;
+    line-height: 30px;
 }
                 
 table.scrolldown tbody {
     /* Set the height of table body */
     height: 200px;
+    top: 200px;
     /* Set vertical scroll */
     overflow-y: auto;
     /* Hide the horizontal scroll */
@@ -159,7 +160,8 @@ td {
 }
 /* gray footer fixed to the bottom of the page */                
 #main-footer{
-    position: fixed;
+    position: relative;
+    top: 200px;
     left: 0;
     bottom: 0;
     width: 100%;

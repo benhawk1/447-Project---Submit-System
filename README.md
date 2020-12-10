@@ -1,5 +1,5 @@
 UMBC CSEE Submit System README
-Iteration 4
+Iteration 5
 
 Virtual Victory, Professor Eric Hamilton, CEO
 Ben Hawkins
@@ -11,13 +11,21 @@ Zachary Federci
 
 
 Current Work:
+The work for Iteration 5 of the Submission System has been divided according to the following sections:
+Ben Hawkins - Worked on setting up assignment recording to operate with assignment creation, assisted with debugging and pull requests
+Jamar Reeves - Assisted with testing and debugging and approved a few pull requests.
+Carly Heiner -  Assisted with video planning, debugging, and testing.
+Nicholas Proulx - Fine-tuning current code: had test files have more similar structure and be slightly more thorough, improved list_collection so that it lists info in separate lines, implemented get_assignments which returns a list of assignment dictionaries for a particular course/section
+Zachary Federici  - Implemented scrollbar across all pages, commented out code helpful for further backend and frontend communication, prepared pages for video demo, created video demo
 
-The work for Iteration 4 of the Submission System has been divided according to the following sections:
-Ben Hawkins - Worked on the backend for recording assignment details, sending assignment and course information to the frontend
-Jamar Reeves - Created a home page and a contact page for a student to see when logged into the system
-Carly Heiner - Added student versions of the home, contact, submit, and assignment pages. Also helped with debugging work for the rest of the team.
-Nicholas Proulx - Created a function to get a student’s latest submission; update current functions to include an assignment “ID” to keep them distinct; detects when a student’s submission for an assignment is late according to that assignment’s deadline
-Zachary Federici  - Edited submission pages to include class, section, and assignment meant for submission. Provided framework for students assignments page, to be implemented further over the next iteration
+Notes for Those Continuing Project
+Although the team did not manage to fully implement the connection between the backend and frontend, there is some code that was written and commented out that the team feels could be helpful, so that anyone continuing the project wouldn’t have to start from scratch implementing this. It exists in the following locations and is a commented out block of code in each place:
+Function submissionViewer() in views.py
+Function studentAssignments() in views.py
+Function getfileViewer() in views.py
+Function getfileAssignments() in views.py
+studentAssignmentPage.html
+submissionViewer.html
 
 Installation and Operation Instructions
 In order to run all code and tests for this iteration of the project, the following tools are required:
@@ -68,35 +76,36 @@ assignmentRecording test.py - This program creates a test project for a given cl
 
 Connecting Backend to Frontend/Middleware
 For this iteration, a new file called authentication.py was created that handles connecting the website to the login system in login.py. If the information is valid, the user is logged in, and if not, they will need to enter new credentials.
-Latest Submission, Assignment ID, Late submissions
+Tests, list_collection, get_assignments
 Files for this section include:
-section_management.py - add_assignment and remove_assignment were modified to include an assignment ID argument. Similarly to student IDs, this is a unique identifier for assignments in order to distinguish between them in any particular section of a course. The two functions use this ID to determine if an assignment already exists upon trying to create one, or if one being deleted does not exist.
-
-section_management_tests.py - update to accommodate the changes made in section_management
-
-submission_backend.py - submit_file now also includes the assignment_ID argument, and uses this to grab the due date of the assignment the student is submitting for. This due date is converted into a datetime object and is compared to the timestamp of the student’s submission, to see if the student’s submission is “late” (after the due date). A new function, get_latest_submission, has also been added, to get the student’s latest submission dictionary (that is, the filename, assignment ID, encoded file, and timestamp).
-
-submission_backend_tests.py - similarly to the other tests file, this has also been updated to accommodate the changes made to submit_file, and now includes a test to show the latest submission made by the student.
+submission_backend_tests.py - Renamed and moved some variables around to more closely match the format in section_management_tests.py. Also included extra tests to specifically test late submissions versus on-time submissions. 
+db_func.py - list_collection now gives a more readable output by listing information such as student dictionaries, assignments, etc on separate lines, rather than simply printing the entire course dictionary on a single line. The downside is that this function now assumes the specific format of the course dictionary, so if a differently-formatted collection is passed into the function, it will crash.
+submit_file.py - get_assignments has been added. This function searches for a specific course/section and returns the list of assignment dictionaries.
 
 Submission, Login, Contact, Home, Assignment, and Student Management Pages Frontend
 Files for this section include:
-submissionPage.html - This is the primary file for this section of the iteration. This webpage features a button that allows the user to choose a file to be uploaded into the database. As development progresses, it is expected that this page will be updated as needed for ease of use. 
+
+submissionPage.html - This page allows the professor to select a class they teach, a section they teach, an assignment, and a file to upload for submission of their own assignments.
 
 loginPage.html - This is where a user would log in to access the submission system. There are two text boxes for a user to enter their username and password, and a login button for the user to press to log in.  
 
-contactPage.html - This is a minimalistic page including a table with the developers names and their email addresses. On the navbar of any other page, clicking “Contact” will route here. 
+contactPage.html - This is a minimalistic page for the professor view including a table with the developers names and their email addresses.
 
-newHomePage.html - This is a minimalistic page including a table that will be dynamically updated with the students of a class and their corresponding information.
+newHomePage.html - This is a minimalistic page for when the professor logs in. It includes a table that will show the classes and sections that a professor teaches.
 
-AssignmentPage.html - This page is for the purpose of a professor adding or removing assignments. It includes a select box with the options of either Create or Remove, a number selector for choosing what class the professor teaches (temporary, to be a select box of classes professor teaches when frontend and backend connect successfully), multiple checkbox options for sections (temporary, to be a multiple checkbox of actual sections the professor teaches for the class selected, again once frontend and backend connect successfully), textbox to enter the name of the assignment, datetime input to select what day and time the assignment is due, and multiple file uploads for rubrics and other documents.
+AssignmentPage.html - This page is for the purpose of a professor adding or removing assignments. It includes a select box with the options of either Create or Remove, a text box for choosing what class the professor teaches, multiple checkbox options for sections the professor teaches, textbox to enter the name of the assignment, datetime input to select what day and time the assignment is due, and multiple file uploads for rubrics and other documents.
 
-studentManagementPage.html - This page is for the purpose of adding and removing students from a class. It includes a select box with the options of either Add or Remove, a number selector for choosing what class the professor teaches (temporary, to be a select box of classes professor teaches when frontend and backend connect successfully), single checkbox options for sections to add/remove the student, text boxes for the students first name, last name, and UMBC email address, and a file uploader for the purpose of uploading a csv file with student information. If a csv file is uploaded, then that will be considered over information entered manually on the page.
+studentManagementPage.html - This page is for the purpose of adding and removing students from a class. It includes a select box with the options of either Add or Remove, a text box for choosing what class the professor teaches, single checkbox options for sections to add/remove the student, text boxes for the students first name, last name, and UMBC ID, and a file uploader for the purpose of uploading a csv file with student information, if multiple students need to be added/removed, for example at the beginning or end of a semester. If a csv file is uploaded, then that will be considered over information entered manually on the page.
 
 studentHomePage.html - this page will be for when students log in. It will display as the home page a student sees after they log in to the system. This page will display the class names and section of that class that a student is enrolled in. This page has not been connected to the system yet due to the nature of the shorter iteration and will be connected in the next iteration if time permits.
 
-studentContactPage - This page will also be displayed to students. When a student is logged in and clicks on the contact navbar link they will be navigated to this page. The difference between this page and the contact page for professors is that the student's version has less navigation options available to them. This page has not been connected to the system yet due to the nature of the shorter iteration and will be connected in the next iteration if time permits.
+studentContactPage.html - This page will also be displayed to students. When a student is logged in and clicks on the contact navbar link they will be navigated to this page. The difference between this page and the contact page for professors is that the student's version has less navigation options available to them. This page has not been connected to the system yet due to the nature of the shorter iteration and will be connected in the next iteration if time permits.
 
-studentAssignmentPage - This page will provide a list of all the assignments for a student, in a table of class, 
+studentSubmissionPage.html - This page is for students to submit their work. They can select their class, section, and assignment to turn in from a select box, as well as upload what they want to turn in.
+
+studentAssignmentPage.html - This page will provide a table of all the assignments for a student, in a table showing class, section, assignment name, attachment included, due date, and due time 
+
+submissionViewer.html - This page is for the professor to view the assignments that students turned in. They are provided with a student’s first name, last name, class, assignment name, attachment student uploaded, the submission date and time of the student, and due date and due time of the assignment.
 
 Testing - For this iteration everyone in the group downloaded the corresponding webpage and opened it locally on their machine to test the functionality. Each page is responsive when adjusting window size vertically and horizontally. The footer is fixed to the bottom of the window, no matter the size of the window. 
 
@@ -109,12 +118,12 @@ Relevant files in Web Files/umbcsubmitsystem/:
 Settings.py - The authentication backend, login, login redirect urls are assigned here.  Paths for the loaders to find the static files (css and images) and templates have also been edited here.  The secret key is removed and must be added before running.  
 Urls.py - The urls for the submitsystem app are included here.
 Relevant files in Web Files/submitsystem/:
-Urls.py - The urls for the login (index), contact, home, submit, student manager and assignments pages are created here.
+Urls.py - The urls for the login (index), contact, home, submit, student manager, submission viewer and assignments pages are created here.
 Html files in templates/submitsystem - The tags and variables that the view will use are added in these files.
-Forms.py - The forms used by the login, submit, student manager, and assignments pages are created here.  The login form requires and username and password; the submit page accepts a file submission and provides dropdown selections for student class, section, and assignment name; the student manager page requires a choice between add and remove, class number, section (a widget was added to allow for one and only one section to be selected when adding a student to a class) , first name, last name, and student ID, it does not yet support the csv upload option; and the assignment page requires a choice between create and remove, class number, section (a widget was added to allow for multiple sections to be selected when adding a new assignment), assignment name, date and time due, and instruction file upload.
+Forms.py - The forms used by the login, submit, student manager , and assignments pages are created here.  The login form requires and username and password; the submit page accepts a file submission and provides dropdown selections for student class, section, and assignment name; the student manager page requires a choice between add and remove, class number, section (a widget was added to allow for one and only one section to be selected when adding a student to a class) , first name, last name, and student ID, it does not yet support the csv upload option; and the assignment page requires a choice between create and remove, class number, section (a widget was added to allow for multiple sections to be selected when adding a new assignment), assignment name, date and time due, and instruction file upload.
 Authentication.py - takes in a username and password sent from the login page, and passes the information to login.py. If the login information is valid, it will check to see if a user variable has already been created under this name, and if not, it will create a new user variable with the appropriate info. This user will then be returned. If the info is invalid, the function will return none. The system will only log the user in if a user has been passed, otherwise they will need to enter new credentials. If you wish to test this functionality, please log into the system with a username and password provided within Users.csv
-Views.py - The login (index), contact, home, submit, student manager, and assignments pages pages are rendered here.  The login page gets a username and password from the user, validated from the list of users in Users.csv.  Depending on if a student or professor account is logged in, different pages are available in the top banner links.  In the student version, the homepage displays a welcome, the contact and submit pages are the same as the professor version except that the links in the banner are different.  The assignments page shows the student a list of their assignments.  The rest of the views described are according to the professor version.  The home page shows a sample professor’s view of their class roster.  At the top of every page but the login page, the user can click the home, contact, submit, student manager, and assignments links to be taken to the corresponding page.  When the user uploads a file on the submit page, it is written to the uploads directory and then saved in the database.  A message is displayed at the bottom to confirm the submission. On the student manager page, a professor can add or remove students by entering the requested information.  On the assignments page, a professor can create or remove an assignment by entering the requested information and uploading an instructions file.
-Tests.py - The unit tests for iteration one, two, and three are created here.  They test that after logging in, it is possible to visit each page (login (index), contact, home, submit, student manager, and assignments) and that the login, submit, student manager, and assignment pages accept user entry.
+Views.py - The login (index), contact, home, submit, student manager, submission viewer, and assignments pages pages are rendered here.  The login page gets a username and password from the user, validated from the list of users in Users.csv.  Depending on if a student or professor account is logged in, different pages are available in the top banner links.  In the student version, the homepage displays a welcome, the contact and submit pages are the same as the professor version except that the links in the banner are different.  The assignments page shows the student a list of their assignments.  The rest of the views described are according to the professor version.  The home page shows a sample professor’s view of their class roster.  At the top of every page but the login page, the user can click the home, contact, submit, student manager, and assignments links to be taken to the corresponding page.  When the user uploads a file on the submit page, it is written to the uploads directory and then saved in the database.  A message is displayed at the bottom to confirm the submission. On the student manager page, a professor can add or remove students by entering the requested information.  The submission viewer page shows the professor information on the submissions made by their students.  On the assignments page, a professor can create or remove an assignment by entering the requested information and uploading an instructions file.
+Tests.py - The unit tests for iteration one, two, three, four, and five are created here.  They test that after logging in, it is possible to visit each page (login (index), contact, home, submit, student manager, submission viewer, and assignments) and that the login, submit, student manager, and assignment pages accept user entry.
 
 To run:
 Ensure that Python 3.8 is installed.  Pip install: django, pymongo, pandas, and django-crispy-forms.  To avoid an error on Windows: make sure the version of numpy that is used is 1.19.3 by running: pip install numpy==1.19.3.  Have MongoDB installed and mongo.exe running
@@ -126,6 +135,7 @@ You will be brought to the login page.  Enter John1 in the username field and Eg
 You will be redirected to the student home page.  Click any link in the top left banner to visit the corresponding page.
 On the submit page, click Choose File, select a file, and click Submit to submit a file.  Select a class, section, and assignment from the dropdown menus.  A “File submitted” message will appear when the file is accepted.
 The student manager page is only directly accessible to professors.  On the student manager page, choose to add or remove a student, enter a class number, select a section, and enter a first name, last name, and student ID.  The student roster csv is not yet supported. Click submit.  If your input is valid, a “Student Successfully Added” or “Student Successfully Removed” message will appear.
+The submission viewer page is only directly accessible to professors.  Click the Student Submissions links that appears on the top banner for professor accounts and you will see a sample list of student submissions.
 On the student version of the assignment page, you will see a sample list of a student’s assignments.  On the professor version of the assignments page, choose to create or remove an assignment, enter a class number, select a section or sections, and enter an assignment name and due date by clicking the calendar icon.  Click Choose File and upload an instructions file.  Click submit.  If your input is valid an “Assignment Successfully Created” or “Assignment Successfully Removed” message will appear.  (The message might not be visible depending on the size of the screen and web page).
 
 To test:
@@ -136,7 +146,6 @@ Creating test database for alias 'default'...
 System check identified no issues (0 silenced).
 .....
 ----------------------------------------------------------------------
-Ran 15 tests in 0.209s
+Ran 16 tests in 0.240s
 OK
 Destroying test database for alias 'default'...
-

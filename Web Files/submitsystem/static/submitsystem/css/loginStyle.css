@@ -56,12 +56,17 @@ h2{
 
 /* design of the login box */
 .login {
-    width: 382px;
-    overflow: hidden;
-    margin: auto;
-    padding: 60px;
     background: black;
-    border-radius: 20px;
+    text-align: center ;
+    color: white;
+    top: 200px;
+    bottom: 100px;
+    width: 350px;
+    border-radius: 1em;
+    padding: 1em;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /* labels "Username" and "Password" */
@@ -71,7 +76,8 @@ label{
 }
 
 #main-footer{
-    position: fixed;
+    position: relative;
+    top: 250px;
     left: 0;
     bottom: 0;
     width: 100%;

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>MyUMBC Submission System</title>
+    <title>Submission System Home Page</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'submitsystem/css/newHomePage.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -25,10 +25,13 @@
                 <li><a href="/submitsystem/submit/">Submit</a></li>
                 <li><a href="/submitsystem/studentmanager/">Student Manager</a></li>
                 <li><a href="/submitsystem/assignments/">Assignments</a></li>
+                <li><a href="/submitsystem/submissionviewer/">Student Submissions</a></li>
+
+
             </ul>
         </div>
-    </nav>
-    <br><br>
+
+    </nav> <br> <br>
 
     <section id="showcase">
         <div class="container">
@@ -42,93 +45,7 @@
         </section>
 
     </div>
-    <!--
-    <table class="scrolldown">
-    <rosterhead>
-  <tr>
-    <th>Class Number</th>
-    <th>Section</th>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>E-Mail</th>
-  </tr>
-  </rosterhead>
-  <rosterbody>
-  <!--row one
-  <tr>
-    <td>Alfreds Futterkiste</td>
-    <td>Maria Anders</td>
-    <td>Germany</td>
-  </tr>
-  <!--row two
-  <tr>
-    <td>Centro comercial Moctezuma</td>
-    <td>Francisco Chang</td>
-    <td>Mexico</td>
-  </tr>
-  <!--row three
-  <tr>
-    <td>Ernst Handel</td>
-    <td>Roland Mendel</td>
-    <td>Austria</td>
-  </tr>
-  <!-- row four
-  <tr>
-    <td>Island Trading</td>
-    <td>Helen Bennett</td>
-    <td>UK</td>
-  </tr>
-  <!-- row five
-  <tr>
-    <td>Laughing Bacchus Winecellars</td>
-    <td>Yoshi Tannamuri</td>
-    <td>Canada</td>
-  </tr>
-  <!-- Row six
-  <tr>
-    <td>Magazzini Alimentari Riuniti</td>
-    <td>Giovanni Rovelli</td>
-    <td>Italy</td>
-  </tr>
-  <!--row seven
-  <tr>
-  <td>USA</td>
-  </tr>
-    <!--row eight
-  <tr>
-  <td>USA</td>
-  </tr>
-    <!--row nine
-  <tr>
-  <td>USA</td>
-  </tr>
-    <!--row ten
-  <tr>
-  <td>USA</td>
-  </tr>
-    <!--row eleven
-  <tr>
-  <td>USA</td>
-  </tr>
-    <!--row twelve
-  <tr>
-  <td>USA</td>
-  </tr>
-    <!--row thirteen
-  <tr>
-  <td>USA</td>
-  </tr>
-    <!--row fouteen
-  <tr>
-  <td>USA</td>
-  </tr>
-    <!--row fifteen
-  <tr>
-  <td>USA</td>
-  </tr>
-  </rosterbody>
-</table>
--->
+
 <!-- table to be displayed on the page-->
 <table class="table">
     <thead>
@@ -141,11 +58,8 @@
     <tbody>
         {% for r in rosterbody %}
             <tr>
-                <td>{{r.classname}}</td>
-                <td>{{r.section}}</td>
-                <td>{{r.firstName}}</td>
-                <td>{{r.lastName}}</td>
-                <td>{{r.email}}</td>
+                <td><b>{{r.classname}}</b></td>
+                <td><b>{{r.section}}</b></td>
             </tr>
         {% endfor %}
     </tbody>

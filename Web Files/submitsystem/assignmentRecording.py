@@ -1,14 +1,14 @@
 import pandas as pd
 
-assignmentInfo = pd.read_csv("C:/Users/benha/Documents/CMSC 447 Project/Assignments.csv")
-loginInfo = pd.read_csv("C:/Users/benha/Documents/CMSC 447 Project/Users.csv")
+assignmentInfo = pd.read_csv("submitsystem/Assignments.csv")
+loginInfo = pd.read_csv("submitsystem/Users.csv")
 
 
 # Records the information for a given assignment when it is first created.
 # Should be called upon creation of any assignment.
 def recordAssignment(classes, sections, name, dueDate, dueTime):
     assignmentInfo.loc[len(assignmentInfo.index)] = [name, classes, sections, dueDate, dueTime]
-    assignmentInfo.to_csv("C:/Users/benha/Documents/CMSC 447 Project/Assignments.csv", index=False)
+    assignmentInfo.to_csv("submitsystem/Assignments.csv", index=False)
 
 # Finds all assignment names for a given class and section.
 # To be called when a student needs to submit an assignment and needs to select a class.
@@ -57,7 +57,7 @@ def removeAssignment(name, myClass, mySection):
 
     #Removes all designated assignments, saves the results
     assignmentInfoTemp = assignmentInfoTemp[~assignmentInfo.index.isin(indexRemoval)]
-    assignmentInfoTemp.to_csv("C:/Users/benha/Documents/CMSC 447 Project/Assignments.csv", index=False)
+    assignmentInfoTemp.to_csv("submitsystem/Assignments.csv", index=False)
 
 
 

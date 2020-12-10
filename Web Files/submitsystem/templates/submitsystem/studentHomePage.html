@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>MyUMBC Submission System</title>
+    <title>Submission System Home Page</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'submitsystem/css/studentHomePage.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -27,7 +27,8 @@
                 <li><a href="/submitsystem/studentassignments/">Assignments</a></li>
             </ul>
         </div>
-    </nav>
+
+    </nav> <br> <br>
 
     <section id="showcase">
         <div class="container">
@@ -41,6 +42,27 @@
         </section>
 
     </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            {% for k in rosterhead %}
+            <th>{{k}}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in rosterbody %}
+            <tr>
+                <td><b>{{r.classname}}</b></td>
+                <td><b>{{r.section}}</b></td>
+                <td><b>{{r.firstname}}</b></td>
+                <td><b>{{r.lastname}}</b></td>
+                <td><b>{{r.email}}</b></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 <!-- Footer for the page -->
    <footer id="main-footer">
